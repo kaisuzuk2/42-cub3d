@@ -14,6 +14,8 @@ NAME	=	cub3D
 CC		=	cc
 FLAG	=	-Wall -Werror -Wextra
 
+INC		=	-Iincludes -Iminilibx-linux
+MAKE	= make -C
 RM		=	rm -rf
 
 _SRCS	=	
@@ -23,12 +25,14 @@ OBJS	=	$(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	$(CC) -o $(NAME) $(FLAG) main.c $(OBJS)
+	$(MAKE) minilibx-linux
+	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(OBJS) -lmlx -lXext -lX11 -lm -lz
 
 %.o:%.c
 	$(CC) $(FLAG) -c $< -o $@
 	
 clean:
+	$(MAKE) minilibx-linux clean
 	$(RM) $(OBJS)
 
 fclean: clean
