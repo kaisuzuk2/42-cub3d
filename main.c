@@ -82,10 +82,10 @@ void render_map(t_game *game) {
     char **map = get_map();
     for (int i = 0; map[i]; i++)
     {
-        for (int j = 0; map[j]; j++)
+        for (int j = 0; map[i][j]; j++)
         {
             if (map[i][j] == '1')
-                draw_square(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, 0x00FF00, &game->img);
+                draw_square(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, 0x00FF00, &game->img);
         }
     }
 }
