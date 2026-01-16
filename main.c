@@ -45,6 +45,7 @@ t_bool init(t_game *game)
     game->img.img_ptr = mlx_new_image(game->mlx, WIDTH, HEIGHT);
     if (!game->img.img_ptr)
         return (FALSE); // ### TODO: エラー処理
+    game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
     return (TRUE);
 }
 

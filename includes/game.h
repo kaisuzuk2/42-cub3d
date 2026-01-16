@@ -21,7 +21,7 @@ typedef struct s_img {
    char *addr;
    int bpp;
    int size_line;
-   int endianp;
+   int endian;
 } t_img;
 
 typedef struct s_player {
