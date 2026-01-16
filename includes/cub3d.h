@@ -15,6 +15,8 @@
 
 #include "mlx.h"
 #include "game.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 # define TILE_SIZE 64
 

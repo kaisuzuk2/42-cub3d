@@ -61,16 +61,41 @@ void setup(t_game *game) {
     game->player.turn_spead = 45 * (PI / 180);
 }
 
-// void render_map() {
+char **get_map(void)
+{
+    char **map = malloc(sizeof(char *) * 11);
+    map[0] = "111111111111111";
+    map[1] = "100000000000001";
+    map[2] = "100000000000001";
+    map[3] = "100000100000001";
+    map[4] = "100000000000001";
+    map[5] = "100000010000001";
+    map[6] = "100001000000001";
+    map[7] = "100000000000001";
+    map[8] = "100000000000001";
+    map[9] = "111111111111111";
+    map[10] = NULL;
+    return (map);
+}
 
-// }
+void render_map(t_game *game) {
+    char **map = get_map();
+    for (int i = 0; map[i]; i++)
+    {
+        for (int j = 0; map[j]; j++)
+        {
+            if (map[i][j] == 1)
+                put_pixel(&game->img, i * TILE_SIZE, j * TILE_SIZE, 0x00FF00);
+        }
+    }
+}
 
 void render_player(t_player *player, t_img *img) {
     draw_square(player->x, player->y, 30, 0xFF0000, img);
 }
 
 void render(t_game *game) {
-    // render_map();
+    render_map(game);
     render_player(&game->player, &game->img);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 }
