@@ -16,6 +16,13 @@
 #include "mlx.h"
 #include "game.h"
 
+# define TILE_SIZE 64
+
+# define PI 3.14159265
+# define TWO_PI 6.28318530
+
+
+
 typedef int t_bool;
 #define TRUE 1
 #define FALSE 0
