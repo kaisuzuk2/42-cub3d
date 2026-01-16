@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): $(SRCS)
 	$(MAKE) minilibx-linux
-	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(OBJS) -lmlx -lXext -lX11 -lm -lz
+	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd
 
 %.o:%.c
 	$(CC) $(FLAG) -c $< -o $@
