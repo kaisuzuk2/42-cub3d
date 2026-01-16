@@ -85,7 +85,7 @@ void render_map(t_game *game) {
         for (int j = 0; map[j]; j++)
         {
             if (map[i][j] == 1)
-                put_pixel(&game->img, i * TILE_SIZE, j * TILE_SIZE, 0x00FF00);
+                draw_square(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, 0x00FF00, &game->img);
         }
     }
 }
