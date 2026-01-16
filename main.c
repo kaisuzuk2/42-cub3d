@@ -72,6 +72,7 @@ void render_player(t_player *player, t_img *img) {
 void render(t_game *game) {
     // render_map();
     render_player(&game->player, &game->img);
+    mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 }
 
 int main(void)
