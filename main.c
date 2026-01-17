@@ -113,8 +113,12 @@ int key_release(int keycode, t_player *player)
     return (0);
 }
 
+#include <stdio.h>
+
 t_bool map_has_wall_at(double x, double y, char **map) 
 {
+    if (!map)
+        return (printf("### here"), FALSE);
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return (TRUE);
     return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
@@ -283,7 +287,7 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
         if (facing_left)
             x_to_check -= 1;
         
-        if (map_has_wall_at(x_to_check, y_to_check, get_map()))
+        if (map_has_wall_at(x_to_check, y_to_check, map))
         {
             found_vert_hit = TRUE;
             vert_hit_x = next_vert_touch_x;
