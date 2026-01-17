@@ -20,6 +20,8 @@ typedef int t_bool;
 #define TRUE 1
 #define FALSE 0
 
+#define NUM_RAYS WIDTH
+
 
 typedef struct s_img {
    void *img_ptr;
@@ -28,6 +30,21 @@ typedef struct s_img {
    int size_line;
    int endian;
 } t_img;
+
+
+typedef struct s_ray {
+    float ray_angle;
+    float wall_hit_x;
+    float wall_hit_y;
+    float distance;
+    int was_hit_vertical;
+    int is_ray_facing_up;
+    int is_ray_facing_down;
+    int is_ray_facing_left;
+    int is_ray_facing_right;
+    int wall_hit_content;
+} t_ray;
+
 
 typedef struct s_player {
     float x;
@@ -39,9 +56,8 @@ typedef struct s_player {
     t_bool key_right;
     t_bool left_rotate;
     t_bool right_rotate;
-
+    t_ray ray[WIDTH];
 } t_player;
-
 
 typedef struct s_game {
     void *mlx;

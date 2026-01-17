@@ -143,26 +143,7 @@ void move_player(t_player *player, char **map)
 
     dx = player->x;
     dy = player->y;
-    // if (player->key_up)
-    // {
-    //     player->x += cos_angle * speed;
-    //     player->y += sin_angle * speed;
-    // }
-    // if (player->key_down)
-    // {
-    //     player->x -= cos_angle * speed;
-    //     player->y -= sin_angle * speed;
-    // }
-    // if (player->key_left)
-    // {
-    //     player->x += sin_angle * speed;
-    //     player->y -= cos_angle * speed;
-    // }
-    // if (player->key_right)
-    // {
-    //     player->x -= sin_angle * speed;
-    //     player->y += cos_angle * speed;
-    // }
+
     if (player->key_up)
     {
         dx += cos_angle * speed;
@@ -190,6 +171,50 @@ void move_player(t_player *player, char **map)
     }
 }
 
+float normalize_angle(float angle)
+{
+    angle = fmodf(angle, TWO_PI);
+    if (angle < 0)
+        angle += TWO_PI;
+    return (angle);
+}
+
+void cast_ray(t_player *player, float ray_angle, t_img *img, char **map)
+{
+    float x = player->x;
+    float y = player->y;
+
+    ray_angle = normalize_angle(ray_angle);
+    
+    float dx = cosf(ray_angle);
+    float dy = sinf(ray_angle);
+
+    while (!map_has_wall_at(x, y, map))
+    {
+        put_pixel(img, x, y, 0xFF0000);
+        x += dx;
+        y += dy;
+    }
+
+}
+
+void cast_all_rays(t_player *player, t_img *img, char **map) 
+{
+    const float fov = PI / 3.0;
+    const float angle_step = fov / NUM_RAYS;
+    float ray_angle = player->angle - (fov / 2);
+
+    for (int i = 0; i < NUM_RAYS; i++) {
+        cast_ray(player, ray_angle, img, map);
+        ray_angle += angle_step;
+    }
+}
+
+void render_ray(t_player *player, t_img *img, char **map) 
+{
+    cast_all_rays(player, img, map);
+}
+
 void render_map(t_game *game) {
     char **map = game->map;
     for (int i = 0; map[i]; i++)
@@ -201,8 +226,6 @@ void render_map(t_game *game) {
         }
     }
 }
-
-
 
 void render_player(t_player *player, t_img *img) {
     draw_square(player->x, player->y, 10, 0xFF0000, img);
@@ -218,6 +241,7 @@ void clear_image(t_img *img)
 int render(t_game *game) {
     clear_image(&game->img);
     render_map(game);
+    render_ray(&game->player, &game->img, game->map);
     render_player(&game->player, &game->img);
     move_player(&game->player, game->map);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
