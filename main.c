@@ -91,7 +91,7 @@ void render_map(t_game *game) {
 }
 
 void render_player(t_player *player, t_img *img) {
-    draw_square(player->x, player->y, 30, 0xFF0000, img);
+    draw_square(player->x, player->y, player->width, 0xFF0000, img);
 }
 
 void render(t_game *game) {
