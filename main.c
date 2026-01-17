@@ -181,21 +181,54 @@ float normalize_angle(float angle)
 
 void cast_ray(t_player *player, float ray_angle, t_img *img, char **map)
 {
-    float x = player->x;
-    float y = player->y;
-
     ray_angle = normalize_angle(ray_angle);
     
-    float dx = cosf(ray_angle);
-    float dy = sinf(ray_angle);
+    int facing_down = (ray_angle > 0 && ray_angle < PI);
+    int facing_up = !facing_down;
+    // 0.5 * PI = PI / 2 右半分
+    int facing_right = (ray_angle < 0.5 * PI || ray_angle > 1.5 * PI);
+    int facing_left = !facing_right;
 
-    while (!map_has_wall_at(x, y, map))
+    float yintercept;
+    float xintercept;
+    yintercept = floorf(player->y / TILE_SIZE) * TILE_SIZE;
+    if (facing_down)
+        yintercept += TILE_SIZE;
+    // tan = tate / yoko -> yoko = tate / tan
+    xintercept = player->x + (yintercept - player->y) / tanf(ray_angle);
+
+    float ystep;
+    ystep = TILE_SIZE;
+    if (facing_up)
+        ystep *= -1;
+    float xstep;
+    xstep = TILE_SIZE / tanf(ray_angle);
+    if (facing_left && xstep > 0)
+        xstep *= -1;
+    if (facing_right && xstep < 0)
+        xstep *= -1;
+
+    float next_horz_touch_x;
+    float next_horz_touch_y;
+
+    next_horz_touch_x = xintercept;
+    next_horz_touch_y = yintercept;
+
+    while (next_horz_touch_x >= 0 && next_horz_touch_x < WIDTH \
+        && next_horz_touch_y >= 0 && next_horz_touch_y < HEIGHT)
     {
-        put_pixel(img, x, y, 0xFF0000);
-        x += dx;
-        y += dy;
-    }
+        float x_to_check = next_horz_touch_x;
+        float y_to_check = next_horz_touch_y;
 
+        if (facing_up)
+            y_to_check -= 1;
+
+        if (map_has_wall_at(x_to_check, y_to_check, map))
+            break;
+        put_pixel(img, x_to_check, y_to_check, 0x0000FF);
+        next_horz_touch_x += xstep;
+        next_horz_touch_y += ystep;
+    }    
 }
 
 void cast_all_rays(t_player *player, t_img *img, char **map) 
