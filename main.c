@@ -179,7 +179,7 @@ float normalize_angle(float angle)
     return (angle);
 }
 
-void cast_ray(t_player *player, float ray_angle, t_img *img, char **map)
+void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
 {
     ray_angle = normalize_angle(ray_angle);
     
@@ -214,6 +214,11 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map)
     next_horz_touch_x = xintercept;
     next_horz_touch_y = yintercept;
 
+
+    int found_horz_hit = FALSE;
+    float horz_hit_x = 0;
+    float horz_hit_y = 0;
+
     while (next_horz_touch_x >= 0 && next_horz_touch_x < WIDTH \
         && next_horz_touch_y >= 0 && next_horz_touch_y < HEIGHT)
     {
@@ -224,11 +229,119 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map)
             y_to_check -= 1;
 
         if (map_has_wall_at(x_to_check, y_to_check, map))
+        {
+            found_horz_hit = TRUE;
+            horz_hit_x = next_horz_touch_x;
+            horz_hit_y = next_horz_touch_y;
+            put_pixel(img, next_horz_touch_x, next_horz_touch_y, 0xFF0000);
             break;
-        put_pixel(img, x_to_check, y_to_check, 0x0000FF);
+        }
         next_horz_touch_x += xstep;
         next_horz_touch_y += ystep;
     }    
+
+// -----
+
+    float vert_xintercept;
+    float vert_yintercept;
+
+    vert_xintercept = floorf(player->x / TILE_SIZE) * TILE_SIZE;
+
+    if (facing_right)
+        vert_xintercept += TILE_SIZE;
+    
+    vert_yintercept = player->y + (vert_xintercept - player->x) * tanf(ray_angle);
+
+
+    float vert_xstep;
+    float vert_ystep;
+
+    vert_xstep = TILE_SIZE;
+    if (facing_left)
+        vert_xstep *= -1;
+
+    vert_ystep = TILE_SIZE * tanf(ray_angle);
+
+    if (facing_up && vert_ystep > 0)
+        vert_ystep *= -1;
+    if (facing_down && vert_ystep < 0)
+        vert_ystep *= -1;
+
+    int found_vert_hit = FALSE;
+    float vert_hit_x = 0;
+    float vert_hit_y = 0;
+
+    float next_vert_touch_x = vert_xintercept;
+    float next_vert_touch_y = vert_yintercept;
+
+    while (next_vert_touch_x >= 0 && next_vert_touch_x < WIDTH \
+            && next_vert_touch_y >= 0 && next_vert_touch_y < HEIGHT)
+    {
+        float x_to_check = next_vert_touch_x;
+        float y_to_check = next_vert_touch_y;
+
+        if (facing_left)
+            x_to_check -= 1;
+        
+        if (map_has_wall_at(x_to_check, y_to_check, map))
+        {
+            found_vert_hit = TRUE;
+            vert_hit_x = next_vert_touch_x;
+            vert_hit_y = next_vert_touch_y;
+            put_pixel(img, next_vert_touch_x, next_vert_touch_y, 0xFF0000);
+            break;
+        }
+        next_vert_touch_x += vert_xstep;
+        next_vert_touch_y += vert_ystep;
+    }
+
+    // -----
+
+    float horz_dist = INFINITY;
+    float vert_dist = INFINITY;
+
+    if (found_horz_hit)
+    {
+        float dx = horz_hit_x - player->x;
+        float dy = horz_hit_y - player->y;
+        horz_dist = sqrt(dx * dx + dy * dy);
+    }
+    if (found_vert_hit)
+    {
+        float dx = vert_hit_x - player->x;
+        float dy = vert_hit_y - player->y;
+        vert_dist = sqrt(dx * dx + dy * dy);
+    }
+
+    float final_hit_x;
+    float final_hit_y;
+    float final_dist;
+    int hit_vertical;
+
+    final_hit_x = vert_hit_x;
+    final_hit_y = vert_hit_y;
+    final_dist = vert_dist;
+    hit_vertical = TRUE;
+
+    if (horz_dist < vert_dist)
+    {
+        final_hit_x = horz_hit_x;
+        final_hit_y = horz_hit_y;
+        final_dist = horz_dist;
+        hit_vertical = FALSE;
+    }
+    
+    player->ray[id].ray_angle = ray_angle;
+    player->ray[id].distance = final_dist;
+    player->ray[id].wall_hit_x = final_hit_x;
+    player->ray[id].wall_hit_y = final_hit_y;
+    player->ray[id].was_hit_vertical = hit_vertical;
+
+    player->ray[id].is_facing_up = facing_up;
+    player->ray[id].is_facing_down = facing_down;
+    player->ray[id].is_facing_left = facing_left;
+    player->ray[id].is_facing_right = facing_right;
+
 }
 
 void cast_all_rays(t_player *player, t_img *img, char **map) 
@@ -238,7 +351,7 @@ void cast_all_rays(t_player *player, t_img *img, char **map)
     float ray_angle = player->angle - (fov / 2);
 
     for (int i = 0; i < NUM_RAYS; i++) {
-        cast_ray(player, ray_angle, img, map);
+        cast_ray(player, ray_angle, img, map, i);
         ray_angle += angle_step;
     }
 }

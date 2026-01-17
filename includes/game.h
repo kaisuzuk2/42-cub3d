@@ -38,10 +38,10 @@ typedef struct s_ray {
     float wall_hit_y;
     float distance;
     int was_hit_vertical;
-    int is_ray_facing_up;
-    int is_ray_facing_down;
-    int is_ray_facing_left;
-    int is_ray_facing_right;
+    int is_facing_up;
+    int is_facing_down;
+    int is_facing_left;
+    int is_facing_right;
     int wall_hit_content;
 } t_ray;
 
