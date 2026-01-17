@@ -115,7 +115,7 @@ int key_release(int keycode, t_player *player)
 
 t_bool map_has_wall_at(double x, double y, char **map) 
 {
-    if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return (TRUE);
     return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
 }
