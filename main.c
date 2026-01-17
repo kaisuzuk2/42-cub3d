@@ -117,7 +117,7 @@ t_bool map_has_wall_at(double x, double y, char **map)
 {
     if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
         return (TRUE);
-    return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != 0);
+    return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
 }
 
 void move_player(t_player *player, char **map)
