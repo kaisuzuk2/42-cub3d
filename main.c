@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+char **get_map(void)
+{
+    char **map = malloc(sizeof(char *) * 11);
+    map[0] = "111111111111111";
+    map[1] = "100000000000001";
+    map[2] = "100000000000001";
+    map[3] = "100000100000001";
+    map[4] = "100000000000001";
+    map[5] = "100000010000001";
+    map[6] = "100001000000001";
+    map[7] = "100000000000001";
+    map[8] = "100000000000001";
+    map[9] = "111111111111111";
+    map[10] = NULL;
+    return (map);
+}
+
 void put_pixel(t_img *img, int x, int y, int color)
 {
     char *dst;
@@ -46,6 +63,7 @@ t_bool init(t_game *game)
     if (!game->img.img_ptr)
         return (FALSE); // ### TODO: エラー処理
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
+    game->map = get_map();
     return (TRUE);
 }
 
@@ -95,12 +113,21 @@ int key_release(int keycode, t_player *player)
     return (0);
 }
 
-void move_player(t_player *player)
+t_bool map_has_wall_at(double x, double y, char **map) 
+{
+    if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+        return (TRUE);
+    return (map[(int)(x / TILE_SIZE)][(int)(y / TILE_SIZE)] != 0);
+}
+
+void move_player(t_player *player, char **map)
 {
     const int speed = 1;
     const float angle_speed = 0.1;
     float cos_angle;
     float sin_angle;
+    double dx;
+    double dy;
 
     if (player->left_rotate)
         player->angle -= angle_speed;
@@ -114,47 +141,57 @@ void move_player(t_player *player)
     cos_angle = cos(player->angle);
     sin_angle = sin(player->angle);
 
-    if (player->key_up)
+    dx = player->x;
+    dy = player->y;
+    // if (player->key_up)
+    // {
+    //     player->x += cos_angle * speed;
+    //     player->y += sin_angle * speed;
+    // }
+    // if (player->key_down)
+    // {
+    //     player->x -= cos_angle * speed;
+    //     player->y -= sin_angle * speed;
+    // }
+    // if (player->key_left)
+    // {
+    //     player->x += sin_angle * speed;
+    //     player->y -= cos_angle * speed;
+    // }
+    // if (player->key_right)
+    // {
+    //     player->x -= sin_angle * speed;
+    //     player->y += cos_angle * speed;
+    // }
+     if (player->key_up)
     {
-        player->x += cos_angle * speed;
-        player->y += sin_angle * speed;
+        dx += cos_angle * speed;
+        dy += sin_angle * speed;
     }
     if (player->key_down)
     {
-        player->x -= cos_angle * speed;
-        player->y -= sin_angle * speed;
+        dx -= cos_angle * speed;
+        dy -= sin_angle * speed;
     }
     if (player->key_left)
     {
-        player->x += sin_angle * speed;
-        player->y -= cos_angle * speed;
+        dx += sin_angle * speed;
+        dy -= cos_angle * speed;
     }
     if (player->key_right)
     {
-        player->x -= sin_angle * speed;
-        player->y += cos_angle * speed;
+        dx -= sin_angle * speed;
+        dy += cos_angle * speed;
+    }
+    if (!map_has_wall_at(dx, dy, map))
+    {
+        player->x = dx;
+        player->y = dy;
     }
 }
 
-char **get_map(void)
-{
-    char **map = malloc(sizeof(char *) * 11);
-    map[0] = "111111111111111";
-    map[1] = "100000000000001";
-    map[2] = "100000000000001";
-    map[3] = "100000100000001";
-    map[4] = "100000000000001";
-    map[5] = "100000010000001";
-    map[6] = "100001000000001";
-    map[7] = "100000000000001";
-    map[8] = "100000000000001";
-    map[9] = "111111111111111";
-    map[10] = NULL;
-    return (map);
-}
-
 void render_map(t_game *game) {
-    char **map = get_map();
+    char **map = game->map;
     for (int i = 0; map[i]; i++)
     {
         for (int j = 0; map[i][j]; j++)
@@ -182,7 +219,7 @@ int render(t_game *game) {
     clear_image(&game->img);
     render_map(game);
     render_player(&game->player, &game->img);
-    move_player(&game->player);
+    move_player(&game->player, game->map);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
     return (0);
 }
