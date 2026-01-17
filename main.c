@@ -57,6 +57,8 @@ void setup(t_game *game) {
     game->player.key_down = FALSE;
     game->player.key_left = FALSE;
     game->player.key_right = FALSE;
+    game->player.left_rotate = FALSE;
+    game->player.right_rotate = FALSE;
 }
 
 int key_press(int keycode, t_player *player) \
