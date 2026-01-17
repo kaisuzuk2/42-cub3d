@@ -115,6 +115,15 @@ int key_release(int keycode, t_player *player)
 
 t_bool map_has_wall_at(double x, double y, char **map) 
 {
+    int row;
+    int col;
+
+    for (row = 0; map[row]; row++)
+        for (col = 0; map[row][col]; col++);
+    if ((int)(y / TILE_SIZE) > row)
+        return (TRUE);
+    if ((int)(x / TILE_SIZE) > col)
+        return (TRUE);
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return (TRUE);
     return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
@@ -330,7 +339,7 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
         final_dist = horz_dist;
         hit_vertical = FALSE;
     }
-    
+
     player->ray[id].ray_angle = ray_angle;
     player->ray[id].distance = final_dist;
     player->ray[id].wall_hit_x = final_hit_x;
