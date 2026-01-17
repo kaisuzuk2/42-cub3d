@@ -13,6 +13,7 @@
 NAME	=	cub3D
 CC		=	cc
 FLAG	=	-Wall -Werror -Wextra
+DEBUG 	=	-g -fsanitize=address
 
 INC		=	-Iincludes -Iminilibx-linux
 MAKE	= make -C
@@ -26,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(SRCS)
 	$(MAKE) minilibx-linux
-	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd
+	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd
 
 %.o:%.c
 	$(CC) $(FLAG) -c $< -o $@
