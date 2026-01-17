@@ -115,12 +115,12 @@ void move_player(t_player *player)
     if (player->key_up)
     {
         player->x += cos_angle * speed;
-        player->y = sin_angle * speed;
+        player->y += sin_angle * speed;
     }
     if (player->key_down)
     {
         player->x -= cos_angle * speed;
-        player->y -= sin_angle *speed;
+        player->y -= sin_angle * speed;
     }
     if (player->key_left)
     {
