@@ -59,6 +59,51 @@ void setup(t_game *game) {
     game->player.rotation_angle = PI / 2;
     game->player.walk_speed = 100;
     game->player.turn_spead = 45 * (PI / 180);
+
+    game->player.key_up = FALSE;
+    game->player.key_down = FALSE;
+    game->player.key_left = FALSE;
+    game->player.key_right = FALSE;
+}
+
+int key_press(int keycode, t_player *player) \
+{
+    if (keycode == XK_W)
+        player->key_up = TRUE;
+    if (keycode == XK_S)
+        player->key_down = TRUE;
+    if (keycode == XK_A)
+        player->key_left = TRUE;
+    if (keycode == XK_D)
+        player->key_right = TRUE;
+    return (0);
+}
+
+int key_release(int keycode, t_player *player)
+{
+    if (keycode == XK_W)
+        player->key_up = FALSE;
+    if (keycode == XK_S)
+        player->key_down = FALSE;
+    if (keycode == XK_A)
+        player->key_left = FALSE;
+    if (keycode == XK_D)
+        player->key_right = FALSE;
+    return (0);
+}
+
+void move_player(t_player *player)
+{
+    const int speed = 5;
+
+    if (player->key_up)
+        player->y -= speed;
+    if (player->key_down)
+        player->y += speed;
+    if (player->key_left)
+        player->x -= speed;
+    if (player->key_right)
+        player->x += speed;
 }
 
 char **get_map(void)
@@ -94,10 +139,12 @@ void render_player(t_player *player, t_img *img) {
     draw_square(player->x, player->y, player->width, 0xFF0000, img);
 }
 
-void render(t_game *game) {
+int render(t_game *game) {
     render_map(game);
     render_player(&game->player, &game->img);
+    move_player(&game->player);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
+    return (0);
 }
 
 int main(void)
@@ -105,7 +152,9 @@ int main(void)
     t_game game;
     init(&game);
     setup(&game);
-    render(&game);
+    mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
+    mlx_hook(game.win, KEYRELEASE, 1L<<0, key_release, &game.player);
+    mlx_loop_hook(game.mlx, render, &game);
     mlx_loop(game.mlx);
     return (0);
 }

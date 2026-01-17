@@ -16,6 +16,11 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
+typedef int t_bool;
+#define TRUE 1
+#define FALSE 0
+
+
 typedef struct s_img {
    void *img_ptr;
    char *addr;
@@ -34,6 +39,11 @@ typedef struct s_player {
     float rotation_angle;
     float walk_speed;
     float turn_spead;
+
+    t_bool key_up;
+    t_bool key_down;
+    t_bool key_left;
+    t_bool key_right;
 } t_player;
 
 
