@@ -15,6 +15,7 @@
 
 #include "mlx.h"
 #include "game.h"
+#include "math.h"
 #include <unistd.h>
 #include <stdlib.h>
 

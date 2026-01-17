@@ -52,14 +52,7 @@ t_bool init(t_game *game)
 void setup(t_game *game) {
     game->player.x = WIDTH / 2;
     game->player.y = HEIGHT / 2;
-    game->player.width = 5;
-    game->player.height = 5;
-    game->player.turn_direction = 0;
-    game->player.walk_direction = 0;
-    game->player.rotation_angle = PI / 2;
-    game->player.walk_speed = 100;
-    game->player.turn_spead = 45 * (PI / 180);
-
+    game->player.angle = PI / 2;
     game->player.key_up = FALSE;
     game->player.key_down = FALSE;
     game->player.key_left = FALSE;
@@ -76,6 +69,10 @@ int key_press(int keycode, t_player *player) \
         player->key_left = TRUE;
     if (keycode == XK_D)
         player->key_right = TRUE;
+    if (keycode == XK_LEFT)
+        player->left_rotate = TRUE;
+    if (keycode == XK_RIGHT)
+        player->right_rotate = TRUE;
     return (0);
 }
 
@@ -89,21 +86,52 @@ int key_release(int keycode, t_player *player)
         player->key_left = FALSE;
     if (keycode == XK_D)
         player->key_right = FALSE;
+    if (keycode == XK_LEFT)
+        player->left_rotate = FALSE;
+    if (keycode == XK_RIGHT)
+        player->right_rotate = FALSE;
     return (0);
 }
 
 void move_player(t_player *player)
 {
     const int speed = 1;
+    const float angle_speed = 0.1;
+    float cos_angle;
+    float sin_angle;
+
+    if (player->left_rotate)
+        player->angle -= angle_speed;
+    if (player->right_rotate)
+        player->angle += angle_speed;
+    if (player->angle >= TWO_PI)
+        player->angle = 0;
+    if (player->angle <= 0)
+        player->angle = TWO_PI;
+
+    cos_angle = cos(player->angle);
+    sin_angle = sin(player->angle);
 
     if (player->key_up)
-        player->y -= speed;
+    {
+        player->x += cos_angle * speed;
+        player->y = sin_angle * speed;
+    }
     if (player->key_down)
-        player->y += speed;
+    {
+        player->x -= cos_angle * speed;
+        player->y -= sin_angle *speed;
+    }
     if (player->key_left)
-        player->x -= speed;
+    {
+        player->x -= cos_angle * speed;
+        player->y += sin_angle * speed;
+    }
     if (player->key_right)
-        player->x += speed;
+    {
+        player->x += cos_angle * speed;
+        player->y -= sin_angle * speed;
+    }
 }
 
 char **get_map(void)
@@ -138,7 +166,7 @@ void render_map(t_game *game) {
 
 
 void render_player(t_player *player, t_img *img) {
-    draw_square(player->x, player->y, player->width, 0xFF0000, img);
+    draw_square(player->x, player->y, 10, 0xFF0000, img);
 }
 
 void clear_image(t_img *img)

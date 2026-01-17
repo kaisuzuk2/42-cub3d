@@ -32,18 +32,14 @@ typedef struct s_img {
 typedef struct s_player {
     float x;
     float y;
-    float width;
-    float height;
-    int turn_direction;
-    int walk_direction; 
-    float rotation_angle;
-    float walk_speed;
-    float turn_spead;
-
+    float angle;
     t_bool key_up;
     t_bool key_down;
     t_bool key_left;
     t_bool key_right;
+    t_bool left_rotate;
+    t_bool right_rotate;
+
 } t_player;
 
 
