@@ -133,9 +133,9 @@ void move_player(t_player *player, char **map)
         player->angle -= angle_speed;
     if (player->right_rotate)
         player->angle += angle_speed;
-    if (player->angle >= TWO_PI)
+    if (player->angle > TWO_PI)
         player->angle = 0;
-    if (player->angle <= 0)
+    if (player->angle < 0)
         player->angle = TWO_PI;
 
     cos_angle = cos(player->angle);
