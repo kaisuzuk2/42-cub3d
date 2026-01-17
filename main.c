@@ -94,7 +94,7 @@ int key_release(int keycode, t_player *player)
 
 void move_player(t_player *player)
 {
-    const int speed = 5;
+    const int speed = 1;
 
     if (player->key_up)
         player->y -= speed;
@@ -135,11 +135,21 @@ void render_map(t_game *game) {
     }
 }
 
+
+
 void render_player(t_player *player, t_img *img) {
     draw_square(player->x, player->y, player->width, 0xFF0000, img);
 }
 
+void clear_image(t_img *img)
+{
+    for (int i = 0; i < HEIGHT; i++)
+        for (int j = 0; j < WIDTH; j++)
+            put_pixel(img, j, i, 0x000000);
+}
+
 int render(t_game *game) {
+    clear_image(&game->img);
     render_map(game);
     render_player(&game->player, &game->img);
     move_player(&game->player);
