@@ -193,7 +193,7 @@ float normalize_angle(float angle)
     return (angle);
 }
 
-void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
+void cast_ray(t_player *player, float ray_angle, char **map, int id)
 {
     ray_angle = normalize_angle(ray_angle);
     
@@ -247,7 +247,7 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
             found_horz_hit = TRUE;
             horz_hit_x = next_horz_touch_x;
             horz_hit_y = next_horz_touch_y;
-            put_pixel(img, next_horz_touch_x, next_horz_touch_y, 0xFF0000);
+            // put_pixel(img, next_horz_touch_x, next_horz_touch_y, 0xFF0000);
             break;
         }
         next_horz_touch_x += xstep;
@@ -302,7 +302,7 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
             found_vert_hit = TRUE;
             vert_hit_x = next_vert_touch_x;
             vert_hit_y = next_vert_touch_y;
-            put_pixel(img, next_vert_touch_x, next_vert_touch_y, 0xFF0000);
+            // put_pixel(img, next_vert_touch_x, next_vert_touch_y, 0xFF0000);
             break;
         }
         next_vert_touch_x += vert_xstep;
@@ -358,21 +358,54 @@ void cast_ray(t_player *player, float ray_angle, t_img *img, char **map, int id)
 
 }
 
-void cast_all_rays(t_player *player, t_img *img, char **map) 
+void cast_all_rays(t_player *player, char **map) 
 {
     const float fov = PI / 3.0;
     const float angle_step = fov / NUM_RAYS;
     float ray_angle = player->angle - (fov / 2);
 
     for (int i = 0; i < NUM_RAYS; i++) {
-        cast_ray(player, ray_angle, img, map, i);
+        cast_ray(player, ray_angle, map, i);
         ray_angle += angle_step;
     }
 }
 
+static void draw_line(t_img *img, float x0, float y0, float x1, float y1, int color)
+{
+    float dx = x1 - x0;
+    float dy = y1 - y0;
+
+    float steps = fabsf(dx);
+    if (fabsf(dy) > steps)
+        steps = fabsf(dy);
+
+    if (steps < 1.0f)
+        return;
+
+    float x_inc = dx / steps;
+    float y_inc = dy / steps;
+
+    float x = x0;
+    float y = y0;
+
+    for (int i = 0; i <= (int)steps; i++)
+    {
+        put_pixel(img, (int)x, (int)y, color);
+        x += x_inc;
+        y += y_inc;
+    }
+}
+
+
 void render_ray(t_player *player, t_img *img, char **map) 
 {
-    cast_all_rays(player, img, map);
+    cast_all_rays(player, map);
+
+    for (int i = 0; i < NUM_RAYS; i++)
+    {
+        if (player->ray[i].distance != INFINITY)
+            draw_line(img, player->x, player->y, player->ray[i].wall_hit_x, player->ray[i].wall_hit_y, 0xFF0000);
+    }
 }
 
 void render_map(t_game *game) {
