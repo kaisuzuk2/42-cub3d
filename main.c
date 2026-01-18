@@ -63,6 +63,8 @@ t_bool load_texture(t_game *game, t_tex *tex, char *path)
     return (TRUE);
 }
 
+#include <stdio.h>
+
 t_bool init(t_game *game)
 {
     game->mlx = mlx_init();
@@ -77,7 +79,7 @@ t_bool init(t_game *game)
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
     game->map = get_map();
     if (!load_texture(game, &game->wall, "textures/wall.xpm"))
-        return (FALSE); // ### TODO: エラー処理
+        return (printf("### here\n"), FALSE); // ### TODO: エラー処理
     mlx_put_image_to_window(game->mlx, game->win, game->wall.img_ptr, 0, 0);
     return (TRUE);
 }
