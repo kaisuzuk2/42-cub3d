@@ -75,7 +75,10 @@ typedef struct s_game {
     t_player player;   
     char **map;
 
-    t_tex wall;
+    t_tex tex_n;
+    t_tex tex_s;
+    t_tex tex_e;
+    t_tex tex_w;
 } t_game;
 
 #endif

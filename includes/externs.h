@@ -17,5 +17,6 @@
 
 // tex.c
 unsigned int get_texel(t_tex *tex, int x, int y);
+t_tex *select_wall_tex(t_game *game, t_ray *ray);
 
 #endif

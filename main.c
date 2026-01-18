@@ -76,7 +76,13 @@ t_bool init(t_game *game)
         return (FALSE); // ### TODO: エラー処理
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
     game->map = get_map();
-    if (!load_texture(game, &game->wall, "textures/wall.xpm"))
+    if (!load_texture(game, &game->tex_n, "textures/north.xpm"))
+        return (FALSE); // ### TODO: エラー処理
+    if (!load_texture(game, &game->tex_s, "textures/south.xpm"))
+        return (FALSE); // ### TODO: エラー処理
+    if (!load_texture(game, &game->tex_e, "textures/east.xpm"))
+        return (FALSE); // ### TODO: エラー処理
+    if (!load_texture(game, &game->tex_w, "textures/west.xpm"))
         return (FALSE); // ### TODO: エラー処理
     return (TRUE);
 }
@@ -478,8 +484,9 @@ void render_3d_walls(t_game *game)
         // テクスチャ
         float hit = game->player.ray[i].was_hit_vertical ? game->player.ray[i].wall_hit_y: \
                                                                 game->player.ray[i].wall_hit_x;
+        t_tex *tex = select_wall_tex(game, &game->player.ray[i]);
         int tex_x = (int)fmodf(hit, TILE_SIZE);
-        tex_x = (int)((float)tex_x * game->wall.w / TILE_SIZE);
+        tex_x = (int)((float)tex_x * tex->w / TILE_SIZE);
 
         if (top < 0)
             top = 0;
@@ -489,9 +496,9 @@ void render_3d_walls(t_game *game)
         {
             int dist_from_top = y - top;
             // テクスチャの座標へスケール
-            int tex_y = (int)((float)dist_from_top * game->wall.h / (bottom - top + 1));
+            int tex_y = (int)((float)dist_from_top * tex->h / (bottom - top + 1));
 
-            unsigned int color = get_texel(&game->wall, tex_x, tex_y);
+            unsigned int color = get_texel(tex, tex_x, tex_y);
             put_pixel(&game->img, i, y, color);
         }
 

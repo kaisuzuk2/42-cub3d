@@ -27,3 +27,21 @@ unsigned int get_texel(t_tex *tex, int x, int y)
     dst = tex->addr + y * tex->size_line + x * (tex->bpp / 8);
     return (*(unsigned int *)dst);
 }
+
+t_tex *select_wall_tex(t_game *game, t_ray *ray)
+{
+    if (ray->was_hit_vertical)
+    {
+        if (ray->is_facing_right)
+            return (&game->tex_w);
+        else 
+            return (&game->tex_e);
+    }
+    else
+    {
+        if (ray->is_facing_down)
+            return (&game->tex_n);
+        else
+            return (&game->tex_s);
+    }
+}
