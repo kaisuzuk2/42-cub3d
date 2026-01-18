@@ -155,7 +155,7 @@ t_bool map_has_wall_at(double x, double y, char **map)
 void move_player(t_player *player, char **map)
 {
     const int speed = 1;
-    const float angle_speed = 0.01;
+    const float angle_speed = 0.03;
     float cos_angle;
     float sin_angle;
     double dx;
@@ -492,6 +492,11 @@ void render_3d_walls(t_game *game)
             top = 0;
         if (bottom >= HEIGHT)
             bottom = HEIGHT - 1;
+        // 天井
+        for (int y = 0; y < top; y++)
+            put_pixel(&game->img, i, y, 0x003333);
+        
+        // 壁
         for (int y = top; y <= bottom; y++)
         {
             int dist_from_top = y - top;
@@ -502,7 +507,9 @@ void render_3d_walls(t_game *game)
             put_pixel(&game->img, i, y, color);
         }
 
-
+        // 床
+        for (int y = bottom; y < HEIGHT; y++)
+            put_pixel(&game->img, i, y, 0x006666);
         // int color = game->player.ray[i].was_hit_vertical ? 0x00CCCC: 0x00FFFF;
 
 
