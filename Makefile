@@ -21,11 +21,13 @@ RM		=	rm -rf
 
 DIR		=	srcs
 _SRCS	=	init.c \
+			input.c \
 			tex.c \
 			player.c \
 			ray.c \
 			map.c \
-			draw.c
+			draw.c \
+			render.c
 SRCS	=	$(addprefix $(DIR)/, $(_SRCS))
 OBJS	=	$(SRCS:%.c=%.o)
 
