@@ -155,7 +155,7 @@ t_bool map_has_wall_at(double x, double y, char **map)
 void move_player(t_player *player, char **map)
 {
     const int speed = 1;
-    const float angle_speed = 0.1;
+    const float angle_speed = 0.01;
     float cos_angle;
     float sin_angle;
     double dx;
