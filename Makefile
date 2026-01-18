@@ -19,18 +19,19 @@ INC		=	-Iincludes -Iminilibx-linux
 MAKE	= make -C
 RM		=	rm -rf
 
-_SRCS	=	
+DIR		=	srcs
+_SRCS	=	tex.c
 SRCS	=	$(addprefix $(DIR)/, $(_SRCS))
 OBJS	=	$(SRCS:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
+$(NAME): $(OBJS)
 	$(MAKE) minilibx-linux
 	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd
 
 %.o:%.c
-	$(CC) $(FLAG) -c $< -o $@
+	$(CC) $(FLAG) $(INC) -c $< -o $@
 	
 clean:
 	$(MAKE) minilibx-linux clean

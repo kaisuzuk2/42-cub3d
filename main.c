@@ -475,9 +475,31 @@ void render_3d_walls(t_game *game)
         int top = (HEIGHT / 2) - (wall_h / 2);
         int bottom = (HEIGHT / 2) + (wall_h / 2);
 
-        int color = game->player.ray[i].was_hit_vertical ? 0x00CCCC: 0x00FFFF;
+        // テクスチャ
+        float hit = game->player.ray[i].was_hit_vertical ? game->player.ray[i].wall_hit_y: \
+                                                                game->player.ray[i].wall_hit_x;
+        int tex_x = (int)fmodf(hit, TILE_SIZE);
+        tex_x = (int)((float)tex_x * game->wall.w / TILE_SIZE);
 
-        draw_wall_split(&game->img, i, top, bottom, color);
+        if (top < 0)
+            top = 0;
+        if (bottom >= HEIGHT)
+            bottom = HEIGHT - 1;
+        for (int y = top; y <= bottom; y++)
+        {
+            int dist_from_top = y - top;
+            // テクスチャの座標へスケール
+            int tex_y = (int)((float)dist_from_top * game->wall.h / (bottom - top + 1));
+
+            unsigned int color = get_texel(&game->wall, tex_x, tex_y);
+            put_pixel(&game->img, i, y, color);
+        }
+
+
+        // int color = game->player.ray[i].was_hit_vertical ? 0x00CCCC: 0x00FFFF;
+
+
+        // draw_wall_split(&game->img, i, top, bottom, color);
     }
 }
 
@@ -490,7 +512,6 @@ int render(t_game *game) {
     // render_player(&game->player, &game->img);
     move_player(&game->player, game->map);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
-    mlx_put_image_to_window(game->mlx, game->win, game->wall.img_ptr, 0, 0);
     return (0);
 }
 
