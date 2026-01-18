@@ -431,11 +431,50 @@ void clear_image(t_img *img)
             put_pixel(img, j, i, 0x000000);
 }
 
+void draw_wall_split(t_img *img ,int x, int top, int bottom, int color)
+{
+    if (top < 0) 
+        top = 0;
+    if (bottom >= HEIGHT) 
+        bottom = HEIGHT - 1;
+    for (int y = top; y <= bottom; y++)
+        put_pixel(img, x, y, color);
+}
+
+void render_3d_walls(t_game *game)
+{
+    const float fov = PI / 3.0f;
+    const float dist_proj_plane = (WIDTH / 2.0f) / tanf(fov / 2.0f);
+
+    for (int i = 0; i < NUM_RAYS; i++)
+    {
+        // fisheye
+        float perp_dist = game->player.ray[i].distance * cosf(game->player.ray[i].ray_angle - game->player.angle);
+
+        // 壁が近すぎる時の補正
+        if (perp_dist < 0.0001f)
+            perp_dist = 0.0001f;
+
+        // 壁の高さ
+        float proj_wall_h = (TILE_SIZE / perp_dist) * dist_proj_plane;
+        int wall_h = (int)proj_wall_h;
+
+        int top = (HEIGHT / 2) - (wall_h / 2);
+        int bottom = (HEIGHT / 2) + (wall_h / 2);
+
+        int color = game->player.ray[i].was_hit_vertical ? 0x00CCCC: 0x00FFFF;
+
+        draw_wall_split(&game->img, i, top, bottom, color);
+    }
+}
+
 int render(t_game *game) {
     clear_image(&game->img);
-    render_map(game);
-    render_ray(&game->player, &game->img, game->map);
-    render_player(&game->player, &game->img);
+    // render_map(game);
+    cast_all_rays(&game->player, game->map);
+    render_3d_walls(game);
+    // render_ray(&game->player, &game->img, game->map);
+    // render_player(&game->player, &game->img);
     move_player(&game->player, game->map);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
     return (0);
