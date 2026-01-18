@@ -20,7 +20,12 @@ MAKE	= make -C
 RM		=	rm -rf
 
 DIR		=	srcs
-_SRCS	=	tex.c
+_SRCS	=	init.c \
+			tex.c \
+			player.c \
+			ray.c \
+			map.c \
+			draw.c
 SRCS	=	$(addprefix $(DIR)/, $(_SRCS))
 OBJS	=	$(SRCS:%.c=%.o)
 
