@@ -22,6 +22,15 @@ typedef int t_bool;
 
 #define NUM_RAYS WIDTH
 
+typedef struct s_tex {
+    void *img_ptr;
+    char *addr;
+    int w;
+    int h;
+    int bpp;
+    int size_line;
+    int endian;
+} t_tex;
 
 typedef struct s_img {
    void *img_ptr;
@@ -65,6 +74,8 @@ typedef struct s_game {
     t_img img;
     t_player player;   
     char **map;
+
+    t_tex wall;
 } t_game;
 
 #endif

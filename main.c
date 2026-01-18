@@ -51,6 +51,18 @@ void draw_square(int x, int y, int size, int color, t_img *img)
         put_pixel(img, x + size, y + i, color);
 }
 
+t_bool load_texture(t_game *game, t_tex *tex, char *path)
+{
+    tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->w, &tex->h);
+    if (!tex->img_ptr)
+        return (FALSE);
+    
+    tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->size_line, &tex->endian);
+    if (!tex->addr)
+        return (FALSE);
+    return (TRUE);
+}
+
 t_bool init(t_game *game)
 {
     game->mlx = mlx_init();
@@ -64,6 +76,9 @@ t_bool init(t_game *game)
         return (FALSE); // ### TODO: エラー処理
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
     game->map = get_map();
+    if (!load_texture(game, &game->wall, "textures/wall.xpm"))
+        return (FALSE); // ### TODO: エラー処理
+    mlx_put_image_to_window(game->mlx, game->win, game->wall.img_ptr, 0, 0);
     return (TRUE);
 }
 
@@ -112,8 +127,6 @@ int key_release(int keycode, t_player *player)
         player->right_rotate = FALSE;
     return (0);
 }
-
-#include <stdio.h>
 
 t_bool map_has_wall_at(double x, double y, char **map) 
 {
@@ -449,6 +462,7 @@ void render_3d_walls(t_game *game)
     for (int i = 0; i < NUM_RAYS; i++)
     {
         // fisheye
+        // cos = 正面 / dist
         float perp_dist = game->player.ray[i].distance * cosf(game->player.ray[i].ray_angle - game->player.angle);
 
         // 壁が近すぎる時の補正
