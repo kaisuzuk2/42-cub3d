@@ -36,7 +36,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(MAKE) minilibx-linux
 	$(MAKE) libft
-	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft
+	$(MAKE) get_next_line
+	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
 
 %.o:%.c
 	$(CC) $(FLAG) $(INC) -c $< -o $@
@@ -44,10 +45,12 @@ $(NAME): $(OBJS)
 clean:
 	$(MAKE) minilibx-linux clean
 	$(MAKE) libft clean
+	$(MAKE) get_next_line clean
 	$(RM) $(OBJS)
 
 fclean: clean
 	$(MAKE) libft fclean
+	$(MAKE) get_next_line fclean
 	$(RM) $(NAME)
 
 re: fclean all
