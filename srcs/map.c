@@ -55,12 +55,12 @@ t_bool map_has_wall_at(double x, double y, char **map)
     row = 0;
     while (map[row])
         row++;
-    int col;
-    col = 0;
-    while (map[0][col])
-        col++;
     if ((int)(y / TILE_SIZE) >= row)
         return (TRUE);
+    int col;
+    col = 0;
+    while (map[row][col])
+        col++;
     if ((int)(x / TILE_SIZE) >= col)
         return (TRUE);
     return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
