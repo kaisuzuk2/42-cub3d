@@ -35,16 +35,19 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) minilibx-linux
-	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd
+	$(MAKE) libft
+	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft
 
 %.o:%.c
 	$(CC) $(FLAG) $(INC) -c $< -o $@
 	
 clean:
 	$(MAKE) minilibx-linux clean
+	$(MAKE) libft clean
 	$(RM) $(OBJS)
 
 fclean: clean
+	$(MAKE) libft fclean
 	$(RM) $(NAME)
 
 re: fclean all
