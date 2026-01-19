@@ -15,7 +15,7 @@ CC		=	cc
 FLAG	=	-Wall -Werror -Wextra
 DEBUG 	=	-g -fsanitize=address
 
-INC		=	-Iincludes -Iminilibx-linux
+INC		=	-Iincludes -Iminilibx-linux -Ilibft -Iget_next_line
 MAKE	= make -C
 RM		=	rm -rf
 
@@ -35,7 +35,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) minilibx-linux
-	$(MAKE) libft
+	$(MAKE) libft bonus
 	$(MAKE) get_next_line
 	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
 

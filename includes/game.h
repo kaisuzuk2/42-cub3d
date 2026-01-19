@@ -22,6 +22,26 @@ typedef int t_bool;
 
 #define NUM_RAYS WIDTH
 
+# define TEX_LABEL 3
+# define COLOR_LABEL 2
+# define RGB_COUNT 3
+
+typedef struct s_config 
+{
+    char *path_n;
+    char *path_s;
+    char *path_e;
+    char *path_w;
+
+    int ceil_color;
+    int floor_color;
+
+    char **map;
+    char player_dir;
+    int player_x;
+    int player_y;
+} t_config;
+
 typedef struct s_tex {
     void *img_ptr;
     char *addr;
