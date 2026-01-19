@@ -33,9 +33,9 @@
 char **get_map(void)
 {
     char **map = malloc(sizeof(char *) * 11);
-    map[0] = "111111111111111";
-    map[1] = "100000000000001";
-    map[2] = "100000000000001";
+    map[0] = "     111111111111111";
+    map[1] = "     100000000111111";
+    map[2] = "111110000000001";
     map[3] = "100000100000001";
     map[4] = "100000000000001";
     map[5] = "10000001000000111111";
@@ -49,15 +49,16 @@ char **get_map(void)
 
 t_bool map_has_wall_at(double x, double y, char **map) 
 {
+    int row;
+    int col;
+
     if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
         return (TRUE);
-    int row;
     row = 0;
     while (map[row])
         row++;
     if ((int)(y / TILE_SIZE) >= row)
         return (TRUE);
-    int col;
     col = 0;
     while (map[(int)(y / TILE_SIZE)][col])
         col++;
