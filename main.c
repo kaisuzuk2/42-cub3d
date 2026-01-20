@@ -19,6 +19,12 @@ int main(void)
     t_config conf;
     if (!read_file("test.cub", &conf))
         return (printf("### here\n"), 1);
+    for (int i = 0; conf.map[i]; i++)
+    {
+        for (int j = 0; conf.map[i][j]; j++)
+            printf("%c", conf.map[i][j]);
+    }
+    return (0);
     init(&game, &conf);
     init_player(&game.player);
     mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
