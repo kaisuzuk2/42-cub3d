@@ -25,6 +25,7 @@ t_bool init(t_game *game, t_config *conf)
         return (FALSE); // ### TODO: エラー処理
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
     // game->map = conf->map;
+    (void)conf;
     game->map = get_map();
     if (!load_texture(game, &game->tex_n, "textures/north.xpm"))
         return (FALSE); // ### TODO: エラー処理
