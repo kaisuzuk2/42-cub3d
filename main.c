@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 int main(void)
 {
     t_game game;
     t_config conf;
     if (!read_file("test.cub", &conf))
-        return (1);
+        return (printf("### here\n"), 1);
     init(&game, &conf);
     init_player(&game.player);
     mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
