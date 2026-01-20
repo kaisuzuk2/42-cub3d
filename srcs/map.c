@@ -47,22 +47,42 @@ char **get_map(void)
     return (map);
 }
 
-t_bool map_has_wall_at(double x, double y, char **map) 
-{
-    int row;
-    int col;
+// t_bool map_has_wall_at(double x, double y, char **map) 
+// {
+//     int row;
+//     int col;
 
-    // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-    //     return (TRUE);
-    row = 0;
-    while (map[row])
-        row++;
-    if ((int)(y / TILE_SIZE) >= row)
+//     // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+//     //     return (TRUE);
+//     row = 0;
+//     while (map[row])
+//         row++;
+//     if ((int)(y / TILE_SIZE) >= row)
+//         return (TRUE);
+//     col = 0;
+//     while (map[(int)(y / TILE_SIZE)][col])
+//         col++;
+//     if ((int)(x / TILE_SIZE) >= col)
+//         return (TRUE);
+//     return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
+// }
+
+t_bool map_has_wall_at(double x, double y, char **map)
+{
+    int map_x;
+    int map_y;
+
+    if (x < 0 || y < 0)
         return (TRUE);
-    col = 0;
-    while (map[(int)(y / TILE_SIZE)][col])
-        col++;
-    if ((int)(x / TILE_SIZE) >= col)
+
+    map_x = (int)(x / TILE_SIZE);
+    map_y = (int)(y / TILE_SIZE);
+
+    if (!map[map_y])
         return (TRUE);
-    return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
+
+    if (map_x < 0 || map_x >= (int)ft_strlen(map[map_y]))
+        return (TRUE);
+
+    return (map[map_y][map_x] == '1');
 }
