@@ -47,22 +47,63 @@ char **get_map(void)
     return (map);
 }
 
-t_bool map_has_wall_at(double x, double y, char **map) 
-{
-    int row;
-    int col;
+// t_bool map_has_wall_at(double x, double y, char **map) 
+// {
+//     int row;
+//     int col;
 
-    // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-    //     return (TRUE);
-    row = 0;
-    while (map[row])
-        row++;
-    if ((int)(y / TILE_SIZE) >= row)
+//     // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+//     //     return (TRUE);
+//     if (x < 0 || y < 0)
+//         return (TRUE);
+//     row = 0;
+//     while (map[row])
+//         row++;
+//     if ((int)(y / TILE_SIZE) >= row)
+//         return (TRUE);
+//     col = 0;
+//     while (map[(int)(y / TILE_SIZE)][col])
+//         col++;
+//     if ((int)(x / TILE_SIZE) >= col)
+//         return (TRUE);
+//     return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
+// }
+
+t_bool map_has_wall_at(double x, double y, char **map)
+{
+    int map_x;
+    int map_y;
+    int h;
+
+    if (!map)
         return (TRUE);
-    col = 0;
-    while (map[(int)(y / TILE_SIZE)][col])
-        col++;
-    if ((int)(x / TILE_SIZE) >= col)
+
+    // ワールド座標が負なら即「外」
+    if (x < 0 || y < 0)
         return (TRUE);
-    return (map[(int)(y / TILE_SIZE)][(int)(x / TILE_SIZE)] != '0');
+
+    map_x = (int)(x / TILE_SIZE);
+    map_y = (int)(y / TILE_SIZE);
+
+    // タイル座標が負なら即「外」
+    if (map_x < 0 || map_y < 0)
+        return (TRUE);
+
+    // 高さを数えて、map_y が範囲外なら「外」
+    h = 0;
+    while (map[h])
+        h++;
+    if (map_y >= h)
+        return (TRUE);
+
+    // 幅（行長）を見て、map_x が範囲外なら「外」
+    // ※行長がバラバラでも安全
+    if (map_x >= (int)ft_strlen(map[map_y]))
+        return (TRUE);
+
+    // 空白は「外(=壁扱い)」に統一するのが安定
+    if (map[map_y][map_x] == ' ')
+        return (TRUE);
+
+    return (map[map_y][map_x] == '1');
 }
