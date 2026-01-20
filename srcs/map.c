@@ -52,8 +52,8 @@ t_bool map_has_wall_at(double x, double y, char **map)
     int row;
     int col;
 
-    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-        return (TRUE);
+    // if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+    //     return (TRUE);
     row = 0;
     while (map[row])
         row++;
