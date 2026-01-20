@@ -61,8 +61,9 @@ static void cast_ray(t_player *player, float ray_angle, char **map, int id)
     float horz_hit_x = 0;
     float horz_hit_y = 0;
 
-    while (next_horz_touch_x >= 0 && next_horz_touch_x < WIDTH \
-        && next_horz_touch_y >= 0 && next_horz_touch_y < HEIGHT)
+    // while (next_horz_touch_x >= 0 && next_horz_touch_x < WIDTH 
+    //     && next_horz_touch_y >= 0 && next_horz_touch_y < HEIGHT)
+    while (1)
     {
         float x_to_check = next_horz_touch_x;
         float y_to_check = next_horz_touch_y;
@@ -116,8 +117,9 @@ static void cast_ray(t_player *player, float ray_angle, char **map, int id)
     float next_vert_touch_x = vert_xintercept;
     float next_vert_touch_y = vert_yintercept;
 
-    while (next_vert_touch_x >= 0 && next_vert_touch_x < WIDTH \
-            && next_vert_touch_y >= 0 && next_vert_touch_y < HEIGHT)
+    // while (next_vert_touch_x >= 0 && next_vert_touch_x < WIDTH 
+    //         && next_vert_touch_y >= 0 && next_vert_touch_y < HEIGHT)
+    while (1)
     {
         float x_to_check = next_vert_touch_x;
         float y_to_check = next_vert_touch_y;
