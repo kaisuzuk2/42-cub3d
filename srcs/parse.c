@@ -217,6 +217,8 @@ t_bool read_map(int fd, t_config *conf)
             free(line);
             continue ;
         }
+        if (is_start && line[0] == '\0')
+            return (free(line), ft_lstclear(&list, free), FALSE); // ### TODO: エラー処理
         is_start = TRUE;
         node = ft_lstnew(line);
         if (!node)
@@ -230,6 +232,47 @@ t_bool read_map(int fd, t_config *conf)
         return (ft_lstclear(&list, free), FALSE);
 
     ft_lstclear(&list, free_node_only);
+    return (TRUE);
+}
+
+t_bool is_player_char(const char c)
+{
+    return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+}
+
+t_bool is_valid_map_char(const char c)
+{
+    return (is_player_char(c) || c == '1' || c == '0' || c == ' ');
+}
+
+t_bool detect_player(t_config *conf)
+{
+    int y;
+    int x;
+    
+    y = 0;
+    while (conf->map && conf->map[y])
+    {
+        x = 0;
+        while (conf->map[y][x])
+        {
+            if (!is_valid_map_char(conf->map[y][x]))
+                return (FALSE); // ### TODO: エラー処理
+            if (is_player_char(conf->map[y][x]))
+            {
+                if (conf->player_dir != 0)
+                    return (FALSE); // ### TODO: エラー処理
+                conf->player_dir = conf->map[y][x];
+                conf->player_x = x;
+                conf->player_y = y;
+                conf->map[y][x] = '0';
+            }
+            x++;
+        }
+        y++;
+    }
+    if (conf->player_dir == 0)
+        return (FALSE);
     return (TRUE);
 }
 
