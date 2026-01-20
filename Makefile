@@ -41,7 +41,7 @@ $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(DEBUG) $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
 
 %.o:%.c
-	$(CC) $(FLAG) $(INC) -c $< -o $@
+	$(CC) $(FLAG) $(DEBUG) $(INC) -c $< -o $@
 	
 clean:
 	$(MAKE) minilibx-linux clean
