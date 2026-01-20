@@ -21,8 +21,7 @@ int main(void)
         return (printf("### here\n"), 1);
     for (int i = 0; conf.map[i]; i++)
     {
-        for (int j = 0; conf.map[i][j]; j++)
-            printf("%c", conf.map[i][j]);
+        printf("%s", conf.map[i]);
     }
     return (0);
     init(&game, &conf);
