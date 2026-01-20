@@ -20,7 +20,8 @@ MAKE	= make -C
 RM		=	rm -rf
 
 DIR		=	srcs
-_SRCS	=	init.c \
+_SRCS	=	parse.c\
+			init.c \
 			input.c \
 			tex.c \
 			player.c \

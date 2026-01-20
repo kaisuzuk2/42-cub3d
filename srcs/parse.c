@@ -356,8 +356,6 @@ t_bool is_map_closed(t_config *conf)
 t_bool read_file(char *file_name, t_config *conf)
 {
     const int fd = open(file_name, O_RDONLY);
-    char *line;
-    char *tmp;
 
     if (fd < 0)
         return (FALSE); // ### TODO: エラー処理

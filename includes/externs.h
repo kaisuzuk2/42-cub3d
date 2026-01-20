@@ -15,8 +15,11 @@
 
 #include "cub3d.h"
 
+// parse.c
+t_bool read_file(char *file_name, t_config *conf);
+
 // init.c
-t_bool init(t_game *game);
+t_bool init(t_game *game, t_config *conf);
 
 // input.c
 int key_press(int keycode, t_player *player);

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-t_bool init(t_game *game)
+t_bool init(t_game *game, t_config *conf)
 {
     game->mlx = mlx_init();
     if (!game->mlx)
@@ -24,7 +24,7 @@ t_bool init(t_game *game)
     if (!game->img.img_ptr)
         return (FALSE); // ### TODO: エラー処理
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
-    game->map = get_map();
+    game->map = conf->map;
     if (!load_texture(game, &game->tex_n, "textures/north.xpm"))
         return (FALSE); // ### TODO: エラー処理
     if (!load_texture(game, &game->tex_s, "textures/south.xpm"))
