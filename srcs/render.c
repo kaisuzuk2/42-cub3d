@@ -121,7 +121,7 @@ static void render_3d_walls(t_game *game)
             top = 0;
         if (bottom >= HEIGHT)
             bottom = HEIGHT - 1;
-        draw_background_strip(game, tex_x, top, bottom);
+        draw_background_strip(game, i, top, bottom);
         
         // 壁
         for (int y = top; y <= bottom; y++)
