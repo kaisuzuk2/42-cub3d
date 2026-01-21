@@ -14,8 +14,8 @@
 
 void init_player(t_player *player, t_config *conf) 
 {
-    player->x = conf->player_x;
-    player->y = conf->player_y;
+    player->x = conf->player_x * TILE_SIZE;
+    player->y = conf->player_y * TILE_SIZE;
     player->angle = conf->player_dir;
     player->key_up = FALSE;
     player->key_down = FALSE;
