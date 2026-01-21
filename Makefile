@@ -34,7 +34,7 @@ OBJS	=	$(SRCS:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) main.c
 	$(MAKE) minilibx-linux
 	$(MAKE) libft bonus
 	$(MAKE) get_next_line
