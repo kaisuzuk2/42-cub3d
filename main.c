@@ -18,6 +18,7 @@ int main(void)
     t_game game;
     if (!read_file("test.cub", &game.conf))
         return (1); // ### TODO: エラー処理
+    printf("%s\n", game.conf.path_n);
     if (!init(&game))
         return (1); // ### TODO: エラー処理
     init_player(&game.player);
