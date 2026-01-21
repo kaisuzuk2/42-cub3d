@@ -93,7 +93,7 @@ typedef struct s_game {
     void *win;
     t_img img;
     t_player player;   
-    char **map;
+    t_config conf;
 
     t_tex tex_n;
     t_tex tex_s;

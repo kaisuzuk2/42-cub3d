@@ -19,7 +19,7 @@
 t_bool read_file(char *file_name, t_config *conf);
 
 // init.c
-t_bool init(t_game *game, t_config *conf);
+t_bool init(t_game *game);
 
 // input.c
 int key_press(int keycode, t_player *player);

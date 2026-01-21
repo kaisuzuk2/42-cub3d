@@ -73,9 +73,9 @@ static void render_3d_walls(t_game *game)
 int render(t_game *game) 
 {
     clear_image(&game->img);
-    cast_all_rays(&game->player, game->map);
+    cast_all_rays(&game->player, game->conf.map);
     render_3d_walls(game);
-    move_player(&game->player, game->map);
+    move_player(&game->player, game->conf.map);
     mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
     return (0);
 }

@@ -16,10 +16,9 @@
 int main(void)
 {
     t_game game;
-    t_config conf;
-    if (!read_file("test.cub", &conf))
+    if (!read_file("test.cub", &game.conf))
         return (printf("### here\n"), 1);
-    init(&game, &conf);
+    init(&game);
     init_player(&game.player);
     mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
     mlx_hook(game.win, KEYRELEASE, 1L<<1, key_release, &game.player);
