@@ -254,7 +254,7 @@ double dir_to_angle(const char c)
     if (c == 'W')
         return (PI);
     if (c == 'N')
-        return (3 * (PI / 2));
+        return (PI / 2 * PI);
     return (0.0);
 }
 
