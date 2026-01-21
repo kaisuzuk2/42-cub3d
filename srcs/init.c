@@ -26,7 +26,7 @@ t_bool init(t_game *game)
     game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_line, &game->img.endian);
     // (void)conf;
     // game->map = get_map();
-    if (!load_texture(game, &game->tex_n,game->conf.path_n))
+    if (!load_texture(game, &game->tex_n, game->conf.path_n))
         return (FALSE); // ### TODO: エラー処理
     if (!load_texture(game, &game->tex_s, game->conf.path_s))
         return (FALSE); // ### TODO: エラー処理
