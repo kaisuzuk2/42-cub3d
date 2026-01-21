@@ -47,7 +47,7 @@ static void render_3d_walls(t_game *game)
             bottom = HEIGHT - 1;
         // 天井
         for (int y = 0; y < top; y++)
-            put_pixel(&game->img, i, y, 0x003333);
+            put_pixel(&game->img, i, y, game->conf.ceil_color);
         
         // 壁
         for (int y = top; y <= bottom; y++)
@@ -62,7 +62,7 @@ static void render_3d_walls(t_game *game)
 
         // 床
         for (int y = bottom + 1; y < HEIGHT; y++)
-            put_pixel(&game->img, i, y, 0x006666);
+            put_pixel(&game->img, i, y, game->conf.floor_color);
         // int color = game->player.ray[i].was_hit_vertical ? 0x00CCCC: 0x00FFFF;
 
 
