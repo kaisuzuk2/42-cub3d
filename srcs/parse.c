@@ -245,6 +245,19 @@ t_bool is_valid_map_char(const char c)
     return (is_player_char(c) || c == '1' || c == '0' || c == ' ');
 }
 
+double dir_to_angle(const char c)
+{
+    if (c == 'E')
+        return (0.0);
+    if (c == 'S')
+        return (PI / 2);
+    if (c == 'W')
+        return (PI);
+    if (c == 'N')
+        return (3 * PI / 2);
+    return (0.0);
+}
+
 t_bool detect_player(t_config *conf)
 {
     int y;
@@ -273,6 +286,7 @@ t_bool detect_player(t_config *conf)
     }
     if (conf->player_dir == 0)
         return (FALSE);
+    conf->player_dir = dir_to_angle(conf->player_dir);
     return (TRUE);
 }
 

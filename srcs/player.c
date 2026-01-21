@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-void init_player(t_player *player) 
+void init_player(t_player *player, t_config *conf) 
 {
-    player->x = WIDTH / 2;
-    player->y = HEIGHT / 2;
-    player->angle = PI / 2;
+    player->x = conf->player_x;
+    player->y = conf->player_y;
+    player->angle = conf->player_dir;
     player->key_up = FALSE;
     player->key_down = FALSE;
     player->key_left = FALSE;

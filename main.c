@@ -21,7 +21,7 @@ int main(void)
     printf("%s\n", game.conf.path_n);
     if (!init(&game))
         return (1); // ### TODO: エラー処理
-    init_player(&game.player);
+    init_player(&game.player, &game.conf);
     mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
     mlx_hook(game.win, KEYRELEASE, 1L<<1, key_release, &game.player);
     mlx_loop_hook(game.mlx, render, &game);

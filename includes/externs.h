@@ -41,7 +41,7 @@ t_tex *select_wall_tex(t_game *game, t_ray *ray);
 t_bool load_texture(t_game *game, t_tex *tex, char *path);
 
 // player.c
-void init_player(t_player *player);
+void init_player(t_player *player, t_config *conf);
 void move_player(t_player *player, char **map);
 
 // ray.c
