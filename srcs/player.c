@@ -25,14 +25,8 @@ void init_player(t_player *player, t_config *conf)
     player->right_rotate = FALSE;
 }
 
-
-void move_player(t_player *player, char **map)
+static void rotate_player(t_player *player)
 {
-    float cos_angle;
-    float sin_angle;
-    double dx;
-    double dy;
-
     if (player->left_rotate)
         player->angle -= ANGLE_SPEED;
     if (player->right_rotate)
@@ -41,33 +35,46 @@ void move_player(t_player *player, char **map)
         player->angle = 0;
     if (player->angle < 0)
         player->angle = TWO_PI;
+}
+
+static void get_next_player_pos(t_player *player, double *dx, double *dy)
+{
+    float cos_angle;
+    float sin_angle;
 
     cos_angle = cos(player->angle);
     sin_angle = sin(player->angle);
-
-    dx = player->x;
-    dy = player->y;
-
     if (player->key_up)
     {
-        dx += cos_angle * MOVE_SPEED;
-        dy += sin_angle * MOVE_SPEED;
+        *dx += cos_angle * MOVE_SPEED;
+        *dy += sin_angle * MOVE_SPEED;
     }
     if (player->key_down)
     {
-        dx -= cos_angle * MOVE_SPEED;
-        dy -= sin_angle * MOVE_SPEED;
+        *dx -= cos_angle * MOVE_SPEED;
+        *dy -= sin_angle * MOVE_SPEED;
     }
     if (player->key_left)
     {
-        dx += sin_angle * MOVE_SPEED;
-        dy -= cos_angle * MOVE_SPEED;
+        *dx += sin_angle * MOVE_SPEED;
+        *dy -= cos_angle * MOVE_SPEED;
     }
     if (player->key_right)
     {
-        dx -= sin_angle * MOVE_SPEED;
-        dy += cos_angle * MOVE_SPEED;
+        *dx -= sin_angle * MOVE_SPEED;
+        *dy += cos_angle * MOVE_SPEED;
     }
+}
+
+void move_player(t_player *player, char **map)
+{
+    double dx;
+    double dy;
+
+    rotate_player(player);
+    dx = player->x;
+    dy = player->y;
+    get_next_player_pos(player, &dx, &dy);
     if (!map_has_wall_at(dx, dy, map))
     {
         player->x = dx;
