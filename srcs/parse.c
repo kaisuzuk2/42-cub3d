@@ -130,7 +130,7 @@ void init_config(t_config *conf)
     conf->floor_color = -1;
     conf->map = NULL;
     conf->player_dir_char = 0;
-    conf->player_init_dir = 0.0
+    conf->player_init_dir = 0.0;
     conf->player_x = -1;
     conf->player_y = -1;
 }
