@@ -28,17 +28,15 @@ void init_player(t_player *player, t_config *conf)
 
 void move_player(t_player *player, char **map)
 {
-    const int speed = 1;
-    const float angle_speed = 0.03;
     float cos_angle;
     float sin_angle;
     double dx;
     double dy;
 
     if (player->left_rotate)
-        player->angle -= angle_speed;
+        player->angle -= ANGLE_SPEED;
     if (player->right_rotate)
-        player->angle += angle_speed;
+        player->angle += ANGLE_SPEED;
     if (player->angle > TWO_PI)
         player->angle = 0;
     if (player->angle < 0)
@@ -52,23 +50,23 @@ void move_player(t_player *player, char **map)
 
     if (player->key_up)
     {
-        dx += cos_angle * speed;
-        dy += sin_angle * speed;
+        dx += cos_angle * MOVE_SPEED;
+        dy += sin_angle * MOVE_SPEED;
     }
     if (player->key_down)
     {
-        dx -= cos_angle * speed;
-        dy -= sin_angle * speed;
+        dx -= cos_angle * MOVE_SPEED;
+        dy -= sin_angle * MOVE_SPEED;
     }
     if (player->key_left)
     {
-        dx += sin_angle * speed;
-        dy -= cos_angle * speed;
+        dx += sin_angle * MOVE_SPEED;
+        dy -= cos_angle * MOVE_SPEED;
     }
     if (player->key_right)
     {
-        dx -= sin_angle * speed;
-        dy += cos_angle * speed;
+        dx -= sin_angle * MOVE_SPEED;
+        dy += cos_angle * MOVE_SPEED;
     }
     if (!map_has_wall_at(dx, dy, map))
     {

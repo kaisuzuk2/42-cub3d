@@ -16,6 +16,9 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
+# define ANGLE_SPEED 0.03f
+# define MOVE_SPEED 1
+
 typedef int t_bool;
 #define TRUE 1
 #define FALSE 0
