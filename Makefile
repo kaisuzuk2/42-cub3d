@@ -38,10 +38,10 @@ $(NAME): $(OBJS)
 	$(MAKE) minilibx-linux
 	$(MAKE) libft bonus
 	$(MAKE) get_next_line
-	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
+	$(CC) -o $(NAME) $(FLAG) $(DEBUG) $(INC) main.c $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
 
 %.o:%.c
-	$(CC) $(FLAG) $(INC) -c $< -o $@
+	$(CC) $(FLAG) $(DEBUG) $(INC) -c $< -o $@
 	
 clean:
 	$(MAKE) minilibx-linux clean
