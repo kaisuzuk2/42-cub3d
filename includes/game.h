@@ -37,7 +37,8 @@ typedef struct s_config
     int floor_color;
 
     char **map;
-    char player_dir;
+    char player_dir_char;
+    float player_init_dir;
     int player_x;
     int player_y;
 } t_config;

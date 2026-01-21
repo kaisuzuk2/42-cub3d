@@ -273,9 +273,9 @@ t_bool detect_player(t_config *conf)
                 return (FALSE); // ### TODO: エラー処理
             if (is_player_char(conf->map[y][x]))
             {
-                if (conf->player_dir != 0)
+                if (conf->player_dir_char != 0)
                     return (FALSE); // ### TODO: エラー処理
-                conf->player_dir = conf->map[y][x];
+                conf->player_dir_char = conf->map[y][x];
                 conf->player_x = x;
                 conf->player_y = y;
                 conf->map[y][x] = '0';
@@ -284,9 +284,9 @@ t_bool detect_player(t_config *conf)
         }
         y++;
     }
-    if (conf->player_dir == 0)
+    if (conf->player_dir_char == 0)
         return (FALSE);
-    conf->player_dir = dir_to_angle(conf->player_dir);
+    conf->player_init_dir = dir_to_angle(conf->player_dir_char);
     return (TRUE);
 }
 
