@@ -41,12 +41,12 @@ void clear_image(t_img *img)
             put_pixel(img, j, i, 0x000000);
 }
 
-void draw_wall_split(t_img *img ,int x, int top, int bottom, int color)
-{
-    if (top < 0) 
-        top = 0;
-    if (bottom >= HEIGHT) 
-        bottom = HEIGHT - 1;
-    for (int y = top; y <= bottom; y++)
-        put_pixel(img, x, y, color);
-}
+// void draw_wall_split(t_img *img ,int x, int top, int bottom, int color)
+// {
+//     if (top < 0) 
+//         top = 0;
+//     if (bottom >= HEIGHT) 
+//         bottom = HEIGHT - 1;
+//     for (int y = top; y <= bottom; y++)
+//         put_pixel(img, x, y, color);
+// }

@@ -29,7 +29,6 @@ int key_release(int keycode, t_player *player);
 void put_pixel(t_img *img, int x, int y, int color);
 void draw_square(int x, int y, int size, int color, t_img *img);
 void clear_image(t_img *img);
-void draw_wall_split(t_img *img ,int x, int top, int bottom, int color);
 
 // map.c
 char **get_map(void);
