@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaisuzuk <kaisuzuk@student.42.fr>          #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-01-16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026-01-16 06:03:57 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2026/01/23 13:13:21 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,44 @@ typedef int t_bool;
 # define TEX_LABEL 3
 # define COLOR_LABEL 2
 # define RGB_COUNT 3
+
+typedef struct s_ray_dir {
+    t_bool is_facing_up;
+    t_bool is_facing_down;
+    t_bool is_facing_left;
+    t_bool is_facing_right;
+} t_ray_dir;
+
+typedef struct s_intercept {
+    float x;
+    float y;
+    float xstep;
+    float ystep;
+} t_intercept;
+
+typedef struct s_hit {
+    t_bool is_found;
+    float x;
+    float y;
+} t_hit;
+
+typedef struct s_final_hit {
+    float x;
+    float y;
+    float dist;
+    t_bool is_vertical;
+} t_final_hit; 
+
+typedef struct s_ray_calc
+{   
+    t_intercept horz;
+    t_intercept vert;
+    t_hit horz_hit;
+    t_hit vert_hit;
+    t_final_hit final;
+    float horz_dist;
+    float vert_dist;
+} t_ray_calc;
 
 typedef struct s_config 
 {
