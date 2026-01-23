@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaisuzuk <kaisuzuk@student.42.fr>          #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-01-16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026-01-16 05:59:17 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2026/01/23 15:41:27 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 # define TILE_SIZE 64
 
 # define PI 3.14159265
 # define TWO_PI 6.28318530
+
+# define ERR_LABEL "Error: "
 
 // /usr/include/X11/keysymdef.h
 # define XK_W 0x0077

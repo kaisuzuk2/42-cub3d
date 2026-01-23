@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/23 14:13:55 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/23 15:41:08 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 
 // parse.c
 t_bool read_file(char *file_name, t_config *conf);
+
+//parse_utils.c
+void init_config(t_config *conf);
+void free_split(char **ptr);
+
+// parse_config.c
+t_bool read_config(int fd, t_config *conf);
+
+//parse_map.c
+t_bool read_map(int fd, t_config *conf);
+
+//parse_valid_map.c
+t_bool is_map_closed(t_config *conf);
+t_bool detect_player(t_config *conf);
 
 // init.c
 t_bool init(t_game *game);
@@ -63,5 +77,9 @@ void store_ray_data(t_player *player, int id, t_ray_calc *calc, t_ray_dir *dir);
 // render.c
 int render(t_game *game);
 
+// error.c
+void print_error(char *str);
+void print_sys_error(char *func);
+void print_error_detail(char *str, char *near);
 
 #endif

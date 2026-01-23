@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/23 14:14:54 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/23 15:39:56 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,10 @@ RM		=	rm -rf
 
 DIR		=	srcs
 _SRCS	=	parse.c\
+			parse_config.c \
+			parse_map.c \
+			parse_valid_map.c \
+			parse_utils.c \
 			init.c \
 			input.c \
 			tex.c \
@@ -31,7 +35,8 @@ _SRCS	=	parse.c\
 			ray_utils.c \
 			map.c \
 			draw.c \
-			render.c
+			render.c \
+			error.c
 SRCS	=	$(addprefix $(DIR)/, $(_SRCS))
 OBJS	=	$(SRCS:%.c=%.o)
 
