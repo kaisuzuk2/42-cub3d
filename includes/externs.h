@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   externs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaisuzuk <kaisuzuk@student.42.fr>          #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-01-18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026-01-18 05:07:28 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2026/01/23 14:13:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,20 @@ void move_player(t_player *player, char **map);
 
 // ray.c
 void cast_all_rays(t_player *player, char **map);
+
+// ray_init.c
+void init_ray_dir(float ray_angle, t_ray_dir *dir);
+void init_horz_intercept(t_player *player, float ray_angle, t_ray_dir *dir, t_intercept *horz);
+void init_vert_intercept(t_player *player, float ray_angle, t_ray_dir *dir, t_intercept *vert);
+
+// ray_dda.c
+void find_vert_hit(t_intercept *vert, t_ray_dir *dir, char **map, t_hit *hit);
+void find_horz_hit(t_intercept *horz, t_ray_dir *dir, char **map, t_hit *hit);
+
+// ray_utils.c
+float calc_dist(t_player *player, t_hit *hit);
+void choose_closest_hit(t_ray_calc *calc);
+void store_ray_data(t_player *player, int id, t_ray_calc *calc, t_ray_dir *dir);
 
 // render.c
 int render(t_game *game);

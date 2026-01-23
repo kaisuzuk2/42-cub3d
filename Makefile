@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: suzukikaisei <suzukikaisei@student.42.f    +#+  +:+       +#+         #
+#    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2025/12/03 09:39:35 by suzukikaise      ###   ########.fr        #
+#    Updated: 2026/01/23 14:14:54 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ _SRCS	=	parse.c\
 			tex.c \
 			player.c \
 			ray.c \
+			ray_init.c \
+			ray_dda.c \
+			ray_utils.c \
 			map.c \
 			draw.c \
 			render.c
