@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/24 14:22:22 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/24 18:35:26 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_bool	set_path(char **dst, char *val)
 	if (*dst != NULL)
 	{
 		print_error_detail("Config: duplicate texture identifier.", val);
-		;
 		return (FALSE);
 	}
 	trim = ft_strtrim(val, " \t");
@@ -137,11 +136,6 @@ static t_bool	parse_config_line(char *line, t_config *conf)
 		return (set_color(&conf->ceil_color, line + COLOR_LABEL));
 	print_error_detail("Config: invalid identifer.", line);
 	return (FALSE);
-}
-
-static t_bool parse_config_line(char *line, t_config *conf)
-{
-	
 }
 
 t_bool	read_config(int fd, t_config *conf)
