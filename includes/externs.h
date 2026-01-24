@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/23 15:41:08 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/24 19:32:51 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_bool read_map(int fd, t_config *conf);
 
 //parse_valid_map.c
 t_bool is_map_closed(t_config *conf);
-t_bool detect_player(t_config *conf);
+t_bool setup_player_from_map(t_config *conf);
 
 // init.c
 t_bool init(t_game *game);

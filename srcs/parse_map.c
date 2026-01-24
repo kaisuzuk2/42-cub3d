@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:21:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/24 19:11:56 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/24 19:22:11 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static t_bool	list_to_map(t_list *list, t_config *conf)
 
 	conf->map = (char **)malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	if (!conf->map)
+	{
+		print_error("Map: malloc failed.");
 		return (FALSE);
+	}
 	i = 0;
 	cur = list;
 	while (cur)
@@ -54,11 +57,17 @@ t_bool	read_map_line(t_bool *is_start, char *line, t_list **head)
 	if (!*is_start && line[0] == '\0')
 		return (TRUE);
 	if (*is_start && line[0] == '\0')
-		return (FALSE); // ### TODO: エラー処理
+	{
+		print_error("Map: empty line inside map.");
+		return (FALSE);
+	}
 	*is_start = TRUE;
 	node = ft_lstnew(line);
 	if (!node)
-		return (FALSE); // ### TODO: エラー処理
+	{
+		print_error("Map: malloc failed.");
+		return (FALSE);
+	}
 	ft_lstadd_back(head, node);
 	return (TRUE);
 }
@@ -75,60 +84,19 @@ t_bool	read_map(int fd, t_config *conf)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break ; // ### TODO: エラー処理
+			break ;
 		chomp_nl(line);
 		if (!read_map_line(&is_start, line, &head))
-		{
-			ft_lstclear(&head, free);
-			return (FALSE);
-		}
+			return (ft_lstclear(&head, free), FALSE);
 	}
 	if (!is_start)
 	{
+		print_error("Map: no map found.");
 		ft_lstclear(&head, free);
-		return (FALSE); // ### TODO: エラー処理
+		return (FALSE);
 	}
 	if (!list_to_map(head, conf))
 		return (ft_lstclear(&head, free), FALSE);
 	ft_lstclear(&head, free_node_only);
 	return (TRUE);
 }
-
-// t_bool read_map(int fd, t_config *conf)
-// {
-//     char *line;
-//     t_bool is_start;
-//     t_list *list;
-//     t_list *node;
-
-//     is_start = FALSE;
-//     list = NULL;
-//     while (1)
-//     {
-//         line = get_next_line(fd);
-//         if (!line)
-//             break ;
-//         chomp_nl(line);
-//         if (!is_start && line[0] == '\0')
-//         {
-//             free(line);
-//             continue ;
-//         }
-//         if (is_start && line[0] == '\0')
-//             return (free(line), ft_lstclear(&list, free), FALSE);
-// 	// ### TODO: エラー処理
-//         is_start = TRUE;
-//         node = ft_lstnew(line);
-//         if (!node)
-//             return (free(line), ft_lstclear(&list, free), FALSE);
-//         ft_lstadd_back(&list, node);
-//     }
-//     if (!is_start)
-//         return (FALSE);
-
-//     if (!list_to_map(list, conf))
-//         return (ft_lstclear(&list, free), FALSE);
-
-//     ft_lstclear(&list, free_node_only);
-//     return (TRUE);
-// }

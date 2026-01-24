@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 02:01:18 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/23 15:31:43 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/24 19:32:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool read_file(char *file_name, t_config *conf)
         return (close(fd), FALSE);
     if (!read_map(fd, conf))
         return (close(fd), FALSE);
-    if (!detect_player(conf))
+    if (!setup_player_from_map(conf))
         return (close(fd), FALSE);
     if (!is_map_closed(conf))
         return (close(fd), FALSE);
