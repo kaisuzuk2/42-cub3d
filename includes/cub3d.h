@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/23 15:41:27 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:00:16 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
+
+# define EXIT_SUCCESS 0
+# define EXIT_FAILUE 1
+
+# define CUB_FILE_EXT ".cub"
+# define CUB_EXT_LEN 4
 
 # define TILE_SIZE 64
 

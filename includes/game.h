@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 15:43:05 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:00:03 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
-
-# define CUB_FILE_EXT ".cub"
 
 # define WEST_TEX_LAB "WE "
 # define EAST_TEX_LAB "EA "
