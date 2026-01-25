@@ -6,21 +6,61 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 14:37:17 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 15:53:53 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
 
-int main(void)
+static void	init_game_data(t_game *game)
+{
+	game->mlx = NULL;
+	game->win = NULL;
+	;
+	game->img.img_ptr = NULL;
+	game->tex_n.img_ptr = NULL;
+	game->tex_s.img_ptr = NULL;
+	game->tex_e.img_ptr = NULL;
+	game->tex_w.img_ptr = NULL;
+}
+
+static t_bool parse_arg(int argc, char **argv)
+{
+    size_t len;
+    char *file_name;
+
+    if (argc != 2 || !argv[1][0])
+    {
+        print_usage("Error: missing map file argument.");
+        return (FALSE);
+    }
+    len = ft_strlen(argv[1]);
+    if (len <= 4)
+    {
+        print_usage("Error: invalid map file name.");
+        return (FALSE);
+    }
+    file_name = argv[1];
+    if (ft_strncmp(file_name + (len - 4), CUB_FILE_EXT, ft_strlen(CUB_FILE_EXT)))
+    {
+        print_usage("Error: file must have .cub extension.");
+        return (FALSE);
+    }
+    return (TRUE);
+}
+
+int main(int argc, char *argv[])
 {
     t_game game;
-    if (!read_file("test.cub", &game.conf))
+    if (!parse_arg(argc, argv))
+        return (1);
+    if (!read_file(argv[1], &game.conf))
         return (1); 
+    init_game_data(&game);
     if (!init(&game))
     {
-        dispose(&game.conf);
+        dispose_conf(&game.conf);
         return (1);
     }
     init_player(&game.player, &game.conf);

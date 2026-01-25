@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 14:36:53 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 15:50:27 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ int render(t_game *game);
 void print_error(char *str);
 void print_sys_error(char *func);
 void print_error_detail(char *str, char *near);
+void print_usage(char *str);
 
 // dispose.c
-void dispose(t_config *conf);
+void dispose_conf(t_config *conf);
+void dispose_game(t_game *game);
 
 #endif
