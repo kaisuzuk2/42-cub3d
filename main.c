@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:00:45 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:24:35 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ int main(int argc, char *argv[])
         return (1);
     }
     init_player(&game.player, &game.conf);
-    mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
-    mlx_hook(game.win, KEYRELEASE, 1L<<1, key_release, &game.player);
+    mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game);
+    mlx_hook(game.win, KEYRELEASE, 1L<<1, key_release, &game);
+    mlx_hook(game.win, DESTROY_NOTIFY, 0, close_window, &game);
     mlx_loop_hook(game.mlx, render, &game);
     mlx_loop(game.mlx);
+    dispose_conf(&game.conf);
+    dispose_game(&game);
     return (EXIT_SUCCESS);
 }

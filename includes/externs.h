@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 15:50:27 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:24:20 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ t_bool setup_player_from_map(t_config *conf);
 // init.c
 t_bool init(t_game *game);
 
-// input.c
-int key_press(int keycode, t_player *player);
-int key_release(int keycode, t_player *player);
+// event.c
+int key_press(int keycode, t_game *game);
+int key_release(int keycode, t_game *game);
+int close_window(t_game *game);
 
 // draw.c
 void put_pixel(t_img *img, int x, int y, int color);

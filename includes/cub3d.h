@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:00:16 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:23:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@
 # define XK_D 0x0064
 # define XK_LEFT 0xff51
 # define XK_RIGHT 0xff53
+# define XK_ESC 0xff1b
 
 // /usr/include/X11/X.h
 # define KEYPRESS 2
 # define KEYRELEASE 3
+# define DESTROY_NOTIFY 17	
 
 #endif
