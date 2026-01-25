@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaisuzuk <kaisuzuk@student.42.fr>          #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-01-16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026-01-16 05:58:20 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2026/01/25 14:37:17 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ int main(void)
 {
     t_game game;
     if (!read_file("test.cub", &game.conf))
-        return (1); // ### TODO: エラー処理
+        return (1); 
     if (!init(&game))
-        return (1); // ### TODO: エラー処理
+    {
+        dispose(&game.conf);
+        return (1);
+    }
     init_player(&game.player, &game.conf);
     printf("%d %d\n", game.conf.player_x, game.conf.player_y);
     mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game.player);
