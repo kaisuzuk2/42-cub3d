@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/24 14:22:19 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 12:44:59 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # define WIDTH 1280
 # define HEIGHT 720
+
+# define WEST_TEX_LAB "WE "
+# define EAST_TEX_LAB "EA "
+# define SOUTH_TEX_LAB "SO "
+# define EAST_TEX_LAB "EA "
+# define FLOOR_TEX_LAB "F "
+# define CEIL_TEX_LAB "C "
 
 # define ANGLE_SPEED 0.03f
 # define MOVE_SPEED 1
