@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/24 18:24:07 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/25 14:00:53 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ _SRCS	=	parse.c\
 			parse_map.c \
 			parse_valid_map.c \
 			parse_utils.c \
+			parse_player.c \
 			init.c \
 			input.c \
 			tex.c \
