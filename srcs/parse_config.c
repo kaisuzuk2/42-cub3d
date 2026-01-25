@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/24 18:35:26 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:50:10 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,27 @@ static t_bool	set_color(int *dst, char *color)
 	return (TRUE);
 }
 
-static t_bool	parse_config_line(char *line, t_config *conf)
-{
-	if (!ft_strncmp(line, "NO ", TEX_LABEL))
-		return (set_path(&conf->path_n, line + TEX_LABEL));
-	else if (!ft_strncmp(line, "SO ", TEX_LABEL))
-		return (set_path(&conf->path_s, line + TEX_LABEL));
-	else if (!ft_strncmp(line, "WE ", TEX_LABEL))
-		return (set_path(&conf->path_w, line + TEX_LABEL));
-	else if (!ft_strncmp(line, "EA ", TEX_LABEL))
-		return (set_path(&conf->path_e, line + TEX_LABEL));
-	else if (!ft_strncmp(line, "F ", COLOR_LABEL))
-		return (set_color(&conf->floor_color, line + COLOR_LABEL));
-	else if (!ft_strncmp(line, "C ", COLOR_LABEL))
-		return (set_color(&conf->ceil_color, line + COLOR_LABEL));
+static t_bool parse_config_line(char *line, t_config *conf)
+{	
+	size_t i;
+	const t_rule rules[] = {
+		{NORTH_TEX_LAB, &conf->path_n, set_path}, 
+		{SOUTH_TEX_LAB, &conf->path_s, set_path},
+		{WEST_TEX_LAB, &conf->path_w, set_path},
+		{EAST_TEX_LAB, &conf->path_e, set_path},
+	};
+	const size_t rule_size = sizeof(rules) / sizeof(rules[0]);
+	i = 0;
+	while (i < rule_size)
+	{
+		if (!ft_strncmp(rules[i].label, line, TEX_LAB_LEN))
+			return (rules[i].handler(rules[i].dst, line + TEX_LAB_LEN));
+		i++;
+	}
+	if (!ft_strncmp(line, FLOOR_TEX_LAB, COLOR_LAB_LEN))
+		return (set_color(&conf->floor_color, line + COLOR_LAB_LEN));
+	else if (!ft_strncmp(line, CEIL_TEX_LAB, COLOR_LAB_LEN))
+		return (set_color(&conf->ceil_color, line + COLOR_LAB_LEN));
 	print_error_detail("Config: invalid identifer.", line);
 	return (FALSE);
 }

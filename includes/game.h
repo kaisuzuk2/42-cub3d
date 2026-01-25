@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 12:44:59 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 13:48:42 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 # define WEST_TEX_LAB "WE "
 # define EAST_TEX_LAB "EA "
 # define SOUTH_TEX_LAB "SO "
-# define EAST_TEX_LAB "EA "
+# define NORTH_TEX_LAB "NO "
 # define FLOOR_TEX_LAB "F "
 # define CEIL_TEX_LAB "C "
+
+# define TEX_LAB_LEN 3
+# define COLOR_LAB_LEN 2
+# define RGB_COUNT 3
 
 # define ANGLE_SPEED 0.03f
 # define MOVE_SPEED 1
@@ -30,11 +34,17 @@ typedef int t_bool;
 #define TRUE 1
 #define FALSE 0
 
+typedef t_bool (*t_handler)(char **dst, char *val);
+
+typedef struct s_rule {
+    const char *label;
+    char **dst;
+    t_handler handler;
+} t_rule;
+
+
 #define NUM_RAYS WIDTH
 
-# define TEX_LABEL 3
-# define COLOR_LABEL 2
-# define RGB_COUNT 3
 
 typedef struct s_ray_dir {
     t_bool is_facing_up;
