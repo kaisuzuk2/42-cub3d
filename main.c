@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:24:35 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:28:19 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     if (!init(&game))
     {
         dispose_conf(&game.conf);
-        return (1);
+        return (EXIT_FAILUE);
     }
     init_player(&game.player, &game.conf);
     mlx_hook(game.win, KEYPRESS, 1L<<0, key_press, &game);

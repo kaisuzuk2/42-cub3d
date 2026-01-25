@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:21:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/24 19:22:11 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/25 16:34:59 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ t_bool	read_map(int fd, t_config *conf)
 			break ;
 		chomp_nl(line);
 		if (!read_map_line(&is_start, line, &head))
-			return (ft_lstclear(&head, free), FALSE);
+			return (free(line), ft_lstclear(&head, free), FALSE);
+		if (!is_start)
+			free(line);
 	}
 	if (!is_start)
 	{
