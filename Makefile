@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/26 09:24:17 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/26 10:24:07 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ _SRCS	=	parse.c\
 			map.c \
 			draw.c \
 			render.c \
+			render_calc.c \
 			error.c \
 			dispose.c
 SRCS	=	$(addprefix $(DIR)/, $(_SRCS))

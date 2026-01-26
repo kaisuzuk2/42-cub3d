@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:08:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:50:39 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:16:00 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ unsigned int	get_texel(t_tex *tex, int x, int y)
 		y = tex->h - 1;
 	dst = tex->addr + y * tex->size_line + x * (tex->bpp / 8);
 	return (*(unsigned int *)dst);
+}
+
+int	get_tex_x(t_ray *ray, t_tex *tex)
+{
+	float	hit;
+	int		tex_x;
+
+	if (ray->was_hit_vertical)
+		hit = ray->wall_hit_y;
+	else
+		hit = ray->wall_hit_x;
+	tex_x = (int)fmodf(hit, TILE_SIZE);
+	tex_x = (int)((float)tex_x * tex->w / TILE_SIZE);
+	return (tex_x);
 }
 
 t_tex	*select_wall_tex(t_game *game, t_ray *ray)

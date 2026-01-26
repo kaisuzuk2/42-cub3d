@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:28:19 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:36:40 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	init_game_data(t_game *game)
 {
 	game->mlx = NULL;
 	game->win = NULL;
-	;
 	game->img.img_ptr = NULL;
 	game->tex_n.img_ptr = NULL;
 	game->tex_s.img_ptr = NULL;
@@ -56,7 +55,11 @@ int main(int argc, char *argv[])
     if (!parse_arg(argc, argv))
         return (EXIT_FAILUE);
     if (!read_file(argv[1], &game.conf))
-        return (EXIT_FAILUE); 
+    {
+        dispose_conf(&game.conf);
+        dispose_game(&game);
+        return (EXIT_FAILUE);
+    }
     init_game_data(&game);
     if (!init(&game))
     {

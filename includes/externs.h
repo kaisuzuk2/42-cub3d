@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:23:53 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 10:23:52 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int close_window(t_game *game);
 
 // draw.c
 void put_pixel(t_img *img, int x, int y, int color);
-void draw_square(int x, int y, int size, int color, t_img *img);
-void clear_image(t_img *img);
 
 // map.c
 char **get_map(void);
@@ -55,6 +53,7 @@ t_bool map_has_wall_at(double x, double y, char **map);
 unsigned int get_texel(t_tex *tex, int x, int y);
 t_tex *select_wall_tex(t_game *game, t_ray *ray);
 t_bool load_texture(t_game *game, t_tex *tex, char *path);
+int	get_tex_x(t_ray *ray, t_tex *tex);
 
 // player.c
 void init_player(t_player *player, t_config *conf);
@@ -79,6 +78,10 @@ void store_ray_data(t_player *player, int id, t_ray_calc *calc, t_ray_dir *dir);
 
 // render.c
 int render(t_game *game);
+
+// render_calc.c
+float	calc_perp_dist(t_ray *ray, float player_angle);
+void	calc_wall(float perp_dist, int *top, int *bottom);
 
 // error.c
 void print_error(char *str);
