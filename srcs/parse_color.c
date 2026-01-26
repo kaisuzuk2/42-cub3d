@@ -6,12 +6,11 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 09:22:56 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:23:31 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:37:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static t_bool	parse_rgb_part(char *color, int *dst)
 {

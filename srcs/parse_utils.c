@@ -6,18 +6,18 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:25:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:21:00 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:44:10 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void free_split(char **ptr)
+void	free_split(char **ptr)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (ptr[i])
-        free(ptr[i++]);
-    free(ptr);
+	i = 0;
+	while (ptr[i])
+		free(ptr[i++]);
+	free(ptr);
 }

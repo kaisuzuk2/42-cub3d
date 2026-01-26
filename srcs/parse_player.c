@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 13:59:47 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 14:03:44 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:43:57 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_bool	is_player_char(const char c)
 {
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
-
 
 static t_bool	is_valid_map_char(const char c)
 {
@@ -36,14 +35,13 @@ static double	dir_to_angle(const char c)
 	return (0.0);
 }
 
-
 static t_bool	register_player_at(t_config *conf, int x, int y)
 {
 	if (conf->player_dir_char != 0)
 	{
-        print_error("Map: multiple player positions.");
-        return (FALSE);
-    }
+		print_error("Map: multiple player positions.");
+		return (FALSE);
+	}
 	conf->player_dir_char = conf->map[y][x];
 	conf->player_x = x;
 	conf->player_y = y;
@@ -63,8 +61,8 @@ t_bool	setup_player_from_map(t_config *conf)
 		while (conf->map[y][x])
 		{
 			if (!is_valid_map_char(conf->map[y][x]))
-				return (print_error_detail("Map: invalid map character", \
-						&conf->map[y][x]), FALSE); 
+				return (print_error_detail("Map: invalid map character",
+						&conf->map[y][x]), FALSE);
 			if (is_player_char(conf->map[y][x]))
 				if (!register_player_at(conf, x, y))
 					return (FALSE);
@@ -73,7 +71,7 @@ t_bool	setup_player_from_map(t_config *conf)
 		y++;
 	}
 	if (conf->player_dir_char == 0)
-		return (print_error("Map: player not found."), FALSE); 
+		return (print_error("Map: player not found."), FALSE);
 	conf->player_init_dir = dir_to_angle(conf->player_dir_char);
 	return (TRUE);
 }

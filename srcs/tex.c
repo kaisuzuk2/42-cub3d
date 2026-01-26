@@ -3,57 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   tex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaisuzuk <kaisuzuk@student.42.fr>          #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026-01-18 05:08:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026-01-18 05:08:07 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2026/01/18 05:08:07 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2026/01/26 09:50:39 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned int get_texel(t_tex *tex, int x, int y)
+unsigned int	get_texel(t_tex *tex, int x, int y)
 {
-    char *dst;
+	char	*dst;
 
-    if (x < 0)
-        x = 0;
-    if (y < 0)
-        y = 0;
-    if (x >= tex->w)
-        x = tex->w - 1;
-    if (y >= tex->h)
-        y = tex->h - 1;
-    dst = tex->addr + y * tex->size_line + x * (tex->bpp / 8);
-    return (*(unsigned int *)dst);
+	if (x < 0)
+		x = 0;
+	if (y < 0)
+		y = 0;
+	if (x >= tex->w)
+		x = tex->w - 1;
+	if (y >= tex->h)
+		y = tex->h - 1;
+	dst = tex->addr + y * tex->size_line + x * (tex->bpp / 8);
+	return (*(unsigned int *)dst);
 }
 
-t_tex *select_wall_tex(t_game *game, t_ray *ray)
+t_tex	*select_wall_tex(t_game *game, t_ray *ray)
 {
-    if (ray->was_hit_vertical)
-    {
-        if (ray->is_facing_right)
-            return (&game->tex_w);
-        else 
-            return (&game->tex_e);
-    }
-    else
-    {
-        if (ray->is_facing_down)
-            return (&game->tex_n);
-        else
-            return (&game->tex_s);
-    }
+	if (ray->was_hit_vertical)
+	{
+		if (ray->is_facing_right)
+			return (&game->tex_w);
+		else
+			return (&game->tex_e);
+	}
+	else
+	{
+		if (ray->is_facing_down)
+			return (&game->tex_n);
+		else
+			return (&game->tex_s);
+	}
 }
 
-t_bool load_texture(t_game *game, t_tex *tex, char *path)
+t_bool	load_texture(t_game *game, t_tex *tex, char *path)
 {
-    tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->w, &tex->h);
-    if (!tex->img_ptr)
-        return (FALSE);
-    
-    tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->size_line, &tex->endian);
-    if (!tex->addr)
-        return (FALSE);
-    return (TRUE);
+	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->w, &tex->h);
+	if (!tex->img_ptr)
+		return (FALSE);
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->size_line,
+			&tex->endian);
+	if (!tex->addr)
+		return (FALSE);
+	return (TRUE);
 }

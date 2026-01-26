@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:23:24 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:39:00 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,17 @@ static t_bool	set_path(char **dst, char *val)
 	return (TRUE);
 }
 
-static t_bool parse_config_line(char *line, t_config *conf)
-{	
-	size_t i;
-	const t_rule rules[] = {
-		{NORTH_TEX_LAB, &conf->path_n, set_path}, 
-		{SOUTH_TEX_LAB, &conf->path_s, set_path},
-		{WEST_TEX_LAB, &conf->path_w, set_path},
-		{EAST_TEX_LAB, &conf->path_e, set_path},
+static t_bool	parse_config_line(char *line, t_config *conf)
+{
+	size_t			i;
+	const t_rule	rules[] = {
+	{NORTH_TEX_LAB, &conf->path_n, set_path},
+	{SOUTH_TEX_LAB, &conf->path_s, set_path},
+	{WEST_TEX_LAB, &conf->path_w, set_path},
+	{EAST_TEX_LAB, &conf->path_e, set_path},
 	};
-	const size_t rule_size = sizeof(rules) / sizeof(rules[0]);
+	const size_t	rule_size = sizeof(rules) / sizeof(rules[0]);
+
 	i = 0;
 	while (i < rule_size)
 	{

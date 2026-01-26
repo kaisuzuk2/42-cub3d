@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:21:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:34:59 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:43:37 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_bool	read_map(int fd, t_config *conf)
 	t_bool	is_start;
 	t_list	*head;
 
-    head = NULL;
+	head = NULL;
 	is_start = FALSE;
 	while (1)
 	{
@@ -91,14 +91,12 @@ t_bool	read_map(int fd, t_config *conf)
 		if (!is_start)
 			free(line);
 	}
-	if (!is_start)
+	if (!is_start || !list_to_map(head, conf))
 	{
-		print_error("Map: no map found.");
-		ft_lstclear(&head, free);
-		return (FALSE);
-	}
-	if (!list_to_map(head, conf))
+		if (!is_start)
+			print_error("Map: no map found.");
 		return (ft_lstclear(&head, free), FALSE);
+	}
 	ft_lstclear(&head, free_node_only);
 	return (TRUE);
 }
