@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 08:20:46 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 10:26:44 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:00:43 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,35 @@ static void	draw_background_strip(t_game *game, int x, int top, int bottom)
 	}
 }
 
-static void	draw_wall_split(t_game *game, int i, int top, int bottom)
+static void draw_wall_split(t_game *game, int i, int top, int bottom)
 {
-	t_tex	*tex;
-	int		tex_x;
-	int		y;
-	int		dist_from_top;
-	int		tex_y;
+	const t_tex *tex = select_wall_tex(game, &game->player.ray[i]);
+	int tex_x;
+	int wall_height;
+	int y;	
+	int tex_y;
 
-	tex = select_wall_tex(game, &game->player.ray[i]);
 	tex_x = get_tex_x(&game->player.ray[i], tex);
+	wall_height = bottom - top;
+	if (wall_height < 1)
+		wall_height = 1;
 	y = top;
-	while (y <= bottom)
+	if (y < 0)
+		y = 0;
+	if (bottom >= HEIGHT)
+		bottom = HEIGHT - 1;
+	while (y < bottom)
 	{
-		dist_from_top = y - top;
-		tex_y = (int)((float)dist_from_top * tex->h / (bottom - top + 1));
+		tex_y = (int)((y - top) * tex->h / wall_height);
+		if (tex_y >= tex->h)
+			tex_y = tex->h - 1;
+		if (tex_y < 0)
+			tex_y = 0;
 		put_pixel(&game->img, i, y, get_texel(tex, tex_x, tex_y));
 		y++;
 	}
 }
+
 
 static void	render_3d_walls(t_game *game)
 {

@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:08:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 10:16:00 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:02:16 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned int	get_texel(t_tex *tex, int x, int y)
+unsigned int	get_texel(const t_tex *tex, int x, int y)
 {
 	char	*dst;
 
@@ -28,7 +28,7 @@ unsigned int	get_texel(t_tex *tex, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-int	get_tex_x(t_ray *ray, t_tex *tex)
+int	get_tex_x(t_ray *ray, const t_tex *tex)
 {
 	float	hit;
 	int		tex_x;

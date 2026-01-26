@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:23:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 10:25:18 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:46:12 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	calc_wall(float perp_dist, int *top, int *bottom)
 	wall_h = (int)proj_wall_h;
 	*top = (HEIGHT / 2) - (wall_h / 2);
 	*bottom = (HEIGHT / 2) + (wall_h / 2);
-	if (*top < 0)
-		*top = 0;
-	if (*bottom >= HEIGHT)
-		*bottom = HEIGHT - 1;
+	// if (*top < 0)
+	// 	*top = 0;
+	// if (*bottom >= HEIGHT)
+	// 	*bottom = HEIGHT - 1;
 }

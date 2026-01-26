@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 10:23:52 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:02:21 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char **get_map(void);
 t_bool map_has_wall_at(double x, double y, char **map);
 
 // tex.c
-unsigned int get_texel(t_tex *tex, int x, int y);
+unsigned int get_texel(const t_tex *tex, int x, int y);
 t_tex *select_wall_tex(t_game *game, t_ray *ray);
 t_bool load_texture(t_game *game, t_tex *tex, char *path);
-int	get_tex_x(t_ray *ray, t_tex *tex);
+int	get_tex_x(t_ray *ray, const t_tex *tex);
 
 // player.c
 void init_player(t_player *player, t_config *conf);
