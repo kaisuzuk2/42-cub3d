@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 14:32:02 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:28:41 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:36:35 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	dispose_map(char **map)
 	int	i;
 
 	i = 0;
+	if (!map)
+		return ;
 	while (map[i])
 	{
 		free(map[i]);

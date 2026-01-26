@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:36:40 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:42:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ static void	init_game_data(t_game *game)
 	game->tex_e.img_ptr = NULL;
 	game->tex_w.img_ptr = NULL;
 }
+
+static void	init_config(t_config *conf)
+{
+	conf->path_n = NULL;
+	conf->path_s = NULL;
+	conf->path_e = NULL;
+	conf->path_w = NULL;
+	conf->ceil_color = -1;
+	conf->floor_color = -1;
+	conf->map = NULL;
+	conf->player_dir_char = 0;
+	conf->player_init_dir = 0.0;
+	conf->player_x = -1;
+	conf->player_y = -1;
+}
+
 
 static t_bool parse_arg(int argc, char **argv)
 {
@@ -54,16 +70,17 @@ int main(int argc, char *argv[])
     t_game game;
     if (!parse_arg(argc, argv))
         return (EXIT_FAILUE);
+    init_config(&game.conf);
     if (!read_file(argv[1], &game.conf))
     {
         dispose_conf(&game.conf);
-        dispose_game(&game);
         return (EXIT_FAILUE);
     }
     init_game_data(&game);
     if (!init(&game))
     {
         dispose_conf(&game.conf);
+        dispose_game(&game);
         return (EXIT_FAILUE);
     }
     init_player(&game.player, &game.conf);
