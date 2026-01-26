@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:39:00 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:48:19 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static t_bool	parse_config_line(char *line, t_config *conf)
 		return (set_color(&conf->floor_color, line + COLOR_LAB_LEN));
 	else if (!ft_strncmp(line, CEIL_TEX_LAB, COLOR_LAB_LEN))
 		return (set_color(&conf->ceil_color, line + COLOR_LAB_LEN));
-	print_error_detail("Config: invalid identifer.", line);
 	return (FALSE);
 }
 
@@ -83,7 +82,14 @@ t_bool	read_config(int fd, t_config *conf)
 			continue ;
 		}
 		if (!parse_config_line(line, conf))
-			return (free(line), FALSE);
+		{
+			if (!is_config_all_set(conf))
+				print_error("Config: missing configuration.");
+			else
+				print_error_detail("Config: invalid identifer", line);
+			free(line);
+			return (FALSE);
+		}
 		free(line);
 	}
 	return (TRUE);
