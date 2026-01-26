@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/25 16:24:51 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/26 09:24:17 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ _SRCS	=	parse.c\
 			parse_valid_map.c \
 			parse_utils.c \
 			parse_player.c \
+			parse_color.c \
 			init.c \
 			event.c \
 			tex.c \

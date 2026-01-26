@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:24:20 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 09:23:53 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 t_bool read_file(char *file_name, t_config *conf);
 
 //parse_utils.c
-void init_config(t_config *conf);
 void free_split(char **ptr);
 
 // parse_config.c
@@ -31,6 +30,9 @@ t_bool read_map(int fd, t_config *conf);
 //parse_valid_map.c
 t_bool is_map_closed(t_config *conf);
 t_bool setup_player_from_map(t_config *conf);
+
+// parse_color.c
+t_bool	set_color(int *dst, char *color);
 
 // init.c
 t_bool init(t_game *game);
