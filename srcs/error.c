@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 14:24:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:31:49 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:43:42 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	print_sys_error(char *func)
 {
 	ft_putstr_fd(ERR_LABEL, STDERR_FILENO);
 	perror(func);
-	ft_putchar_fd('\n', STDERR_FILENO);
 }
 
 void	print_error_detail(char *str, char *near)
