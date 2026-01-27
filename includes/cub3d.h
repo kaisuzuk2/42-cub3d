@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 15:33:11 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:40:04 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include "general.h"
 # include "game.h"
 # include "externs.h"
 # include "get_next_line.h"
@@ -26,19 +27,6 @@
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILUE 1
-
-# define CUB_FILE_EXT ".cub"
-# define CUB_EXT_LEN 4
-
-# define TILE_SIZE 64
-
-# define PI 3.14159265
-# define TWO_PI 6.28318530
-
-# define ERR_LABEL "Error: "
-# define CONF_LABEL "Config: "
-# define MAP_LABEL "Map: "
-# define MLX_LABEL "mlx: "
 
 // /usr/include/X11/keysymdef.h
 # define XK_W 0x0077

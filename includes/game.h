@@ -6,33 +6,25 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 14:44:05 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:41:15 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
+#include "general.h"
+
 # define WIDTH 1280
 # define HEIGHT 720
-
-# define WEST_TEX_LAB "WE "
-# define EAST_TEX_LAB "EA "
-# define SOUTH_TEX_LAB "SO "
-# define NORTH_TEX_LAB "NO "
-# define FLOOR_TEX_LAB "F "
-# define CEIL_TEX_LAB "C "
-
-# define TEX_LAB_LEN 3
-# define COLOR_LAB_LEN 2
-# define RGB_COUNT 3
 
 # define ANGLE_SPEED 0.03f
 # define MOVE_SPEED 1.5
 
-typedef int		t_bool;
-# define TRUE 1
-# define FALSE 0
+# define TILE_SIZE 64
+
+# define PI 3.14159265
+# define TWO_PI 6.28318530
 
 typedef t_bool	(*t_handler)(char **dst, char *val);
 
@@ -42,8 +34,6 @@ typedef struct s_rule
 	char		**dst;
 	t_handler	handler;
 }				t_rule;
-
-# define NUM_RAYS WIDTH
 
 typedef struct s_ray_dir
 {
@@ -138,6 +128,8 @@ typedef struct s_ray
 	int			wall_hit_content;
 }				t_ray;
 
+# define NUM_RAYS WIDTH
+
 typedef struct s_player
 {
 	float		x;
@@ -149,7 +141,7 @@ typedef struct s_player
 	t_bool		key_right;
 	t_bool		left_rotate;
 	t_bool		right_rotate;
-	t_ray		ray[WIDTH];
+	t_ray		ray[NUM_RAYS];
 }				t_player;
 
 typedef struct s_game
