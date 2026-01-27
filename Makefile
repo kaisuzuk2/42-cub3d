@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/27 14:24:15 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/27 16:25:07 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,27 +20,38 @@ MAKE	= make -C
 RM		=	rm -rf
 
 DIR		=	srcs
-_SRCS	=	parse.c\
-			parse_config.c \
-			parse_map.c \
-			parse_valid_map.c \
-			parse_utils.c \
-			parse_player.c \
-			parse_color.c \
-			init.c \
-			event.c \
-			tex.c \
-			player.c \
-			ray.c \
-			ray_init.c \
-			ray_dda.c \
-			ray_utils.c \
-			map.c \
-			render.c \
-			render_calc.c \
-			error.c \
-			dispose.c
-SRCS	=	$(addprefix $(DIR)/, $(_SRCS))
+SRCS	=	$(addprefix $(DIR)/,\
+				$(addprefix game/, \
+					event.c \
+					map.c \
+					player.c \
+					) \
+				$(addprefix parse/, \
+						parse_color.c \
+						parse_config.c \
+						parse_map.c \
+						parse_player.c \
+						parse_utils.c \
+						parse_valid_map.c \
+						parse.c \
+					) \
+				$(addprefix raycast/, \
+						ray_dda.c \
+						ray_init.c \
+						ray_utils.c \
+						ray.c \
+					) \
+				$(addprefix render/, \
+						render_calc.c \
+						render.c \
+						tex.c \
+					) \
+				$(addprefix utils/, \
+						dispose.c \
+						error.c \
+					) \
+				init.c )
+
 OBJS	=	$(SRCS:%.c=%.o)
 
 all: $(NAME)
