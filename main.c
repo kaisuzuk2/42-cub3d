@@ -6,14 +6,14 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 13:42:44 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:02:40 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
 
-static void	init_game_data(t_game *game)
+static void	init_game(t_game *game)
 {
 	game->mlx = NULL;
 	game->win = NULL;
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
         dispose_conf(&game.conf);
         return (EXIT_FAILUE);
     }
-    init_game_data(&game);
+    init_game(&game);
     if (!init(&game))
     {
         dispose_conf(&game.conf);
