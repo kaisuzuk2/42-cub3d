@@ -6,23 +6,23 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:23:58 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:45:52 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "mlx.h"
-#include "game.h"
-#include "math.h"
-#include "externs.h"
-#include "libft.h"
-#include "get_next_line.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "game.h"
+# include "externs.h"
+# include "get_next_line.h"
+# include "libft.h"
+# include "math.h"
+# include "mlx.h"
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILUE 1
@@ -49,6 +49,6 @@
 // /usr/include/X11/X.h
 # define KEYPRESS 2
 # define KEYRELEASE 3
-# define DESTROY_NOTIFY 17	
+# define DESTROY_NOTIFY 17
 
 #endif
