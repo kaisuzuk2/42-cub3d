@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/25 16:00:03 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 13:31:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define RGB_COUNT 3
 
 # define ANGLE_SPEED 0.03f
-# define MOVE_SPEED 1
+# define MOVE_SPEED 1.5
 
 typedef int t_bool;
 #define TRUE 1
