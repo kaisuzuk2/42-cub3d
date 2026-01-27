@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:08:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 14:42:37 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 12:13:38 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int	get_tex_x(t_ray *ray, const t_tex *tex)
 	tex_x = (int)fmodf(hit, TILE_SIZE);
 	tex_x = (int)((float)tex_x * tex->w / TILE_SIZE);
 
+	if (ray->was_hit_vertical && cos(ray->ray_angle) < 0)
+		tex_x = tex->w - tex_x - 1;
+	if (!ray->was_hit_vertical && sin(ray->ray_angle) > 0)
+		tex_x = tex->w - tex_x - 1;
 	return (tex_x);
 }
 
