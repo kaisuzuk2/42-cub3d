@@ -6,11 +6,23 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 07:54:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 15:33:50 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:01:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static t_bool	load_texture(t_game *game, t_tex *tex, char *path)
+{
+	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->w, &tex->h);
+	if (!tex->img_ptr)
+		return (FALSE);
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->size_line,
+			&tex->endian);
+	if (!tex->addr)
+		return (FALSE);
+	return (TRUE);
+}
 
 t_bool	init(t_game *game)
 {
