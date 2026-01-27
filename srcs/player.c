@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 08:03:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:47:06 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 13:40:27 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,34 @@ static void	get_next_player_pos(t_player *player, double *dx, double *dy)
 	}
 }
 
+// void	move_player(t_player *player, char **map)
+// {
+// 	double	dx;
+// 	double	dy;
+
+// 	rotate_player(player);
+// 	dx = player->x;
+// 	dy = player->y;
+// 	get_next_player_pos(player, &dx, &dy);
+// 	if (!map_has_wall_at(dx, dy, map))
+// 	{
+// 		player->x = dx;
+// 		player->y = dy;
+// 	}
+// }
+
+
 void	move_player(t_player *player, char **map)
 {
 	double	dx;
 	double	dy;
-
+	
 	rotate_player(player);
 	dx = player->x;
 	dy = player->y;
 	get_next_player_pos(player, &dx, &dy);
-	if (!map_has_wall_at(dx, dy, map))
-	{
+	if (!map_has_wall_at(dx, player->y, map))
 		player->x = dx;
+	if (!map_has_wall_at(player->x, dy, map))
 		player->y = dy;
-	}
 }
