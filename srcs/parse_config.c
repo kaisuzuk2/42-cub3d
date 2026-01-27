@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 14:48:19 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:17:09 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,8 @@ t_bool	read_config(int fd, t_config *conf)
 		}
 		if (!parse_config_line(line, conf))
 		{
-			if (!is_config_all_set(conf))
-				print_error("Config: missing configuration.");
-			else
-				print_error_detail("Config: invalid identifer", line);
 			free(line);
-			return (FALSE);
+			return (print_error("Config: missing configuration."), FALSE);
 		}
 		free(line);
 	}
