@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 14:34:16 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:29:49 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static t_bool	set_path(char **dst, char *val)
 
 	if (*dst != NULL)
 	{
-		print_error_detail("Config: duplicate texture identifier.", val);
+		print_error_detail(CONF_LABEL, "duplicate texture identifier.", val);
 		return (FALSE);
 	}
 	trim = ft_strtrim(val, " \t");
 	*dst = trim;
 	if (!*dst)
 	{
-		print_error("Config: malloc failed.");
+		print_error(CONF_LABEL, "malloc failed.");
 		return (FALSE);
 	}
 	return (TRUE);
@@ -71,11 +71,11 @@ t_bool	read_config(int fd, t_config *conf)
 	{
 		tmp = get_next_line(fd);
 		if (!tmp)
-			return (print_error("Config: incomplete."), FALSE);
+			return (print_error(CONF_LABEL, "incomplete."), FALSE);
 		line = ft_strtrim(tmp, " \t\n");
 		free(tmp);
 		if (!line)
-			return (print_error("Config: malloc failed."), FALSE);
+			return (print_error(CONF_LABEL, "malloc failed."), FALSE);
 		if (!line[0])
 		{
 			free(line);
@@ -84,7 +84,7 @@ t_bool	read_config(int fd, t_config *conf)
 		if (!parse_config_line(line, conf))
 		{
 			free(line);
-			return (print_error("Config: missing configuration."), FALSE);
+			return (print_error(CONF_LABEL, "missing configuration."), FALSE);
 		}
 		free(line);
 	}

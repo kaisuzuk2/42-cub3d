@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:58:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 14:02:40 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:26:42 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ static t_bool parse_arg(int argc, char **argv)
     
     if (argc != 2 || !argv[1][0])
     {
-        print_usage("Error: missing map file argument.");
+        print_usage("missing map file argument.");
         return (FALSE);
     }
     len = ft_strlen(argv[1]);
     if (len <= CUB_EXT_LEN)
     {
-        print_usage("Error: invalid map file name.");
+        print_usage("invalid map file name.");
         return (FALSE);
     }
     file_name = argv[1];
     if (ft_strncmp(file_name + (len - CUB_EXT_LEN), CUB_FILE_EXT, ft_strlen(CUB_FILE_EXT)))
     {
-        print_usage("Error: file must have .cub extension.");
+        print_usage("file must have .cub extension.");
         return (FALSE);
     }
     return (TRUE);

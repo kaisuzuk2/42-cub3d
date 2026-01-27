@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 09:22:56 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:37:55 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:32:17 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static t_bool	parse_rgb_part(char *color, int *dst)
 	{
 		if (!ft_isdigit(color[i]))
 		{
-			print_error_detail("Config: invalid color value", color);
+			print_error_detail(CONF_LABEL, "invalid color value", color);
 			return (FALSE);
 		}
 		val = val * 10 + (color[i] - '0');
 		if (val > 255)
 		{
-			print_error_detail("Config: color value out of range", color);
+			print_error_detail(CONF_LABEL, "color value out of range", color);
 			return (FALSE);
 		}
 		i++;
@@ -45,7 +45,7 @@ static t_bool	parse_one_rgb(char *color, int *dst)
 
 	trim = ft_strtrim(color, " \t");
 	if (!trim)
-		return (print_error("Config: malloc failed."), FALSE);
+		return (print_error(CONF_LABEL, "malloc failed."), FALSE);
 	res = parse_rgb_part(trim, dst);
 	free(trim);
 	return (res);
@@ -59,7 +59,7 @@ static t_bool	parse_rgb_to_int(char *color, int *val)
 
 	colors = ft_split(color, ',');
 	if (!colors)
-		return (print_error("Config: malloc failed."), FALSE);
+		return (print_error(CONF_LABEL, "malloc failed."), FALSE);
 	i = 0;
 	while (i < RGB_COUNT)
 	{
@@ -72,7 +72,7 @@ static t_bool	parse_rgb_to_int(char *color, int *val)
 	if (i != RGB_COUNT || colors[i] != NULL)
 	{
 		free_split(colors);
-		print_error_detail("Config: color format error", color);
+		print_error_detail(CONF_LABEL, "color format error", color);
 		return (FALSE);
 	}
 	*val = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
@@ -86,7 +86,7 @@ t_bool	set_color(int *dst, char *color)
 
 	if (*dst != -1)
 	{
-		print_error_detail("Config: duplicate color identifier", color);
+		print_error_detail(CONF_LABEL, "duplicate color identifier", color);
 		return (FALSE);
 	}
 	if (!parse_rgb_to_int(color, &val))

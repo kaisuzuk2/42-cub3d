@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:21:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:43:37 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:30:24 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_bool	list_to_map(t_list *list, t_config *conf)
 	conf->map = (char **)malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	if (!conf->map)
 	{
-		print_error("Map: malloc failed.");
+		print_error(MAP_LABEL, "malloc failed.");
 		return (FALSE);
 	}
 	i = 0;
@@ -58,14 +58,14 @@ t_bool	read_map_line(t_bool *is_start, char *line, t_list **head)
 		return (TRUE);
 	if (*is_start && line[0] == '\0')
 	{
-		print_error("Map: empty line inside map.");
+		print_error(MAP_LABEL, "empty line inside map.");
 		return (FALSE);
 	}
 	*is_start = TRUE;
 	node = ft_lstnew(line);
 	if (!node)
 	{
-		print_error("Map: malloc failed.");
+		print_error(MAP_LABEL, "malloc failed.");
 		return (FALSE);
 	}
 	ft_lstadd_back(head, node);
@@ -94,7 +94,7 @@ t_bool	read_map(int fd, t_config *conf)
 	if (!is_start || !list_to_map(head, conf))
 	{
 		if (!is_start)
-			print_error("Map: no map found.");
+			print_error(MAP_LABEL, "no map found.");
 		return (ft_lstclear(&head, free), FALSE);
 	}
 	ft_lstclear(&head, free_node_only);

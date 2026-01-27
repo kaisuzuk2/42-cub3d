@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 14:44:02 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:28:00 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ float			calc_perp_dist(t_ray *ray, float player_angle);
 void			calc_wall(float perp_dist, int *top, int *bottom);
 
 // error.c
-void			print_error(char *str);
+void			print_error(char *label, char *str);
 void			print_sys_error(char *func);
-void			print_error_detail(char *str, char *near);
+void			print_error_detail(char *label, char *str, char *near);
 void			print_usage(char *str);
 
 // dispose.c

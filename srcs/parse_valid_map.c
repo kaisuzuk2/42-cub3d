@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:23:15 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 09:44:46 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:30:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ t_bool	is_map_closed(t_config *conf)
 	cpy = dup_map(conf->map);
 	if (!cpy)
 	{
-		print_error("Map: malloc failed.");
+		print_error(MAP_LABEL, "malloc failed.");
 		return (FALSE);
 	}
 	is_leak = fload_fill(cpy, conf->player_x, conf->player_y);
 	if (is_leak)
-		print_error("Map: not closed by walls.");
+		print_error(MAP_LABEL, "not closed by walls.");
 	i = 0;
 	while (cpy[i])
 	{

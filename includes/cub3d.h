@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 14:45:52 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:33:11 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define TWO_PI 6.28318530
 
 # define ERR_LABEL "Error: "
+# define CONF_LABEL "Config: "
+# define MAP_LABEL "Map: "
+# define MLX_LABEL "mlx: "
 
 // /usr/include/X11/keysymdef.h
 # define XK_W 0x0077
