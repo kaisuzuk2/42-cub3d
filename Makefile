@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/27 14:12:11 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/27 14:24:15 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,10 @@ $(NAME): $(OBJS) main.c
 	$(MAKE) minilibx-linux
 	$(MAKE) libft bonus
 	$(MAKE) get_next_line
-	$(CC) -o $(NAME) $(FLAG) $(DEBUG) $(INC) main.c $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
+	$(CC) -o $(NAME) $(FLAG) $(INC) main.c $(OBJS) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lbsd -lft -Llibft -lgnl -Lget_next_line
 
 %.o:%.c
-	$(CC) $(FLAG) $(DEBUG) $(INC) -c $< -o $@
+	$(CC) $(FLAG) $(INC) -c $< -o $@
 	
 clean:
 	$(MAKE) minilibx-linux clean
