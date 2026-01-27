@@ -6,11 +6,21 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 08:20:46 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 13:00:43 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:11:02 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	put_pixel(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return ;
+	dst = img->addr + y * img->size_line + x * (img->bpp / 8);
+	*(unsigned int *)dst = color;
+}
 
 static void	draw_background_strip(t_game *game, int x, int top, int bottom)
 {
@@ -30,13 +40,13 @@ static void	draw_background_strip(t_game *game, int x, int top, int bottom)
 	}
 }
 
-static void draw_wall_split(t_game *game, int i, int top, int bottom)
+static void	draw_wall_split(t_game *game, int i, int top, int bottom)
 {
-	const t_tex *tex = select_wall_tex(game, &game->player.ray[i]);
-	int tex_x;
-	int wall_height;
-	int y;	
-	int tex_y;
+	const t_tex	*tex = select_wall_tex(game, &game->player.ray[i]);
+	int			tex_x;
+	int			wall_height;
+	int			y;
+	int			tex_y;
 
 	tex_x = get_tex_x(&game->player.ray[i], tex);
 	wall_height = bottom - top;
@@ -58,7 +68,6 @@ static void draw_wall_split(t_game *game, int i, int top, int bottom)
 		y++;
 	}
 }
-
 
 static void	render_3d_walls(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/26 13:02:21 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 14:11:33 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ t_bool init(t_game *game);
 int key_press(int keycode, t_game *game);
 int key_release(int keycode, t_game *game);
 int close_window(t_game *game);
-
-// draw.c
-void put_pixel(t_img *img, int x, int y, int color);
 
 // map.c
 char **get_map(void);
