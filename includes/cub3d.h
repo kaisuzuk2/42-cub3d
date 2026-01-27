@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 05:59:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 15:40:04 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:42:51 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "general.h"
+# include "general.h"
 # include "game.h"
 # include "externs.h"
 # include "get_next_line.h"

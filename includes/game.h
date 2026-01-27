@@ -6,14 +6,14 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 15:41:15 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/27 15:43:06 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-#include "general.h"
+# include "general.h"
 
 # define WIDTH 1280
 # define HEIGHT 720
