@@ -1,0 +1,28 @@
+NO ./textures/renga/renga_north.xpm
+SO ./textures/renga/renga_south.xpm
+WE ./textures/renga/renga_west.xpm
+EA ./textures/renga/renga_east.xpm
+F 120,100,80
+C 90,90,100
+
+111
+1N1
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+101
+111
