@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 11:14:09 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:08:22 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_bool			read_map(int fd, t_config *conf);
 
 // parse_valid_map.c
 t_bool			is_map_closed(t_config *conf);
+
+// parse_player.c
 t_bool			setup_player_from_map(t_config *conf);
 
 // parse_color.c
@@ -33,8 +35,8 @@ t_bool			set_color(int *dst, char *color);
 
 // init.c
 t_bool			init(t_game *game);
-void	init_game(t_game *game);
-void	init_config(t_config *conf);
+void			init_game(t_game *game);
+void			init_config(t_config *conf);
 
 // event.c
 int				key_press(int keycode, t_game *game);
@@ -42,7 +44,6 @@ int				key_release(int keycode, t_game *game);
 int				close_window(t_game *game);
 
 // map.c
-char			**get_map(void);
 t_bool			map_has_wall_at(double x, double y, char **map);
 
 // tex.c

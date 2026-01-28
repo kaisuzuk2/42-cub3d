@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:23:15 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 12:13:24 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:11:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	**dup_map(char **map)
 
 static t_leak	flood_fill(char **map, int x, int y)
 {
-	t_leak res;
+	t_leak	res;
 
 	if (y < 0 || x < 0)
 		return (LEAK_OUT);
@@ -72,7 +72,7 @@ static t_leak	flood_fill(char **map, int x, int y)
 t_bool	is_map_closed(t_config *conf)
 {
 	char	**cpy;
-	t_leak leak;
+	t_leak	leak;
 	int		i;
 
 	cpy = dup_map(conf->map);

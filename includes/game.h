@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 06:03:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 12:05:20 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:11:27 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@
 # define PI 3.14159265
 # define TWO_PI 6.28318530
 
-typedef enum e_leak {
-	LEAK_NONE, 
+typedef enum e_leak
+{
+	LEAK_NONE,
 	LEAK_OUT,
 	LEAK_SPACE,
-} t_leak;
+}				t_leak;
 
 typedef t_bool	(*t_handler)(char **dst, char *val);
 

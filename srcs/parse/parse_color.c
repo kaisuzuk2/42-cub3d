@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 09:22:56 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 11:14:05 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:11:40 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	free_split(char **ptr)
 		free(ptr[i++]);
 	free(ptr);
 }
-
 
 static t_bool	parse_rgb_part(char *color, int *dst)
 {

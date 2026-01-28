@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 07:54:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 11:07:44 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:12:13 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,3 @@ void	init_config(t_config *conf)
 	conf->player_x = -1;
 	conf->player_y = -1;
 }
-
