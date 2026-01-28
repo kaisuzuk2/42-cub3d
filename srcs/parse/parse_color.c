@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 09:22:56 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 13:11:40 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 15:20:50 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,17 @@ static t_bool	parse_rgb_to_int(char *color, int *val)
 
 t_bool	set_color(int *dst, char *color)
 {
-	int	val;
+	int		val;
+	size_t	len;
 
 	if (*dst != -1)
 	{
 		print_error_detail(CONF_LABEL, "duplicate color identifier", color);
 		return (FALSE);
 	}
+	len = ft_strlen(color);
+	if (len == 0 || color[len - 1] == ',')
+		return (FALSE);
 	if (!parse_rgb_to_int(color, &val))
 		return (FALSE);
 	*dst = val;
