@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 16:01:34 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 11:08:07 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_bool			set_color(int *dst, char *color);
 
 // init.c
 t_bool			init(t_game *game);
+void	init_game(t_game *game);
+void	init_config(t_config *conf);
 
 // event.c
 int				key_press(int keycode, t_game *game);

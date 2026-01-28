@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/27 16:25:07 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/28 11:05:45 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ SRCS	=	$(addprefix $(DIR)/,\
 						dispose.c \
 						error.c \
 					) \
-				init.c )
+				$(addprefix init/, \
+						init.c \
+					))
 
 OBJS	=	$(SRCS:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 07:54:42 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 16:01:55 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 11:07:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,30 @@ t_bool	init(t_game *game)
 		return (print_error(MLX_LABEL, "failed to load texture."), FALSE);
 	return (TRUE);
 }
+
+void	init_game(t_game *game)
+{
+	game->mlx = NULL;
+	game->win = NULL;
+	game->img.img_ptr = NULL;
+	game->tex_n.img_ptr = NULL;
+	game->tex_s.img_ptr = NULL;
+	game->tex_e.img_ptr = NULL;
+	game->tex_w.img_ptr = NULL;
+}
+
+void	init_config(t_config *conf)
+{
+	conf->path_n = NULL;
+	conf->path_s = NULL;
+	conf->path_e = NULL;
+	conf->path_w = NULL;
+	conf->ceil_color = -1;
+	conf->floor_color = -1;
+	conf->map = NULL;
+	conf->player_dir_char = 0;
+	conf->player_init_dir = 0.0;
+	conf->player_x = -1;
+	conf->player_y = -1;
+}
+
