@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/03 09:34:20 by suzukikaise       #+#    #+#              #
-#    Updated: 2026/01/28 11:05:45 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2026/01/28 11:14:46 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS	=	$(addprefix $(DIR)/,\
 						parse_config.c \
 						parse_map.c \
 						parse_player.c \
-						parse_utils.c \
 						parse_valid_map.c \
 						parse.c \
 					) \

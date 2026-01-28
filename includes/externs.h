@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 05:07:28 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/28 11:08:07 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 11:14:09 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 
 // parse.c
 t_bool			read_file(char *file_name, t_config *conf);
-
-// parse_utils.c
-void			free_split(char **ptr);
 
 // parse_config.c
 t_bool			read_config(int fd, t_config *conf);

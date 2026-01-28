@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:23:15 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 15:30:58 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/28 12:13:24 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,38 @@ static char	**dup_map(char **map)
 	return (res);
 }
 
-static t_bool	fload_fill(char **map, int x, int y)
+static t_leak	flood_fill(char **map, int x, int y)
 {
+	t_leak res;
+
 	if (y < 0 || x < 0)
-		return (TRUE);
-	if (!map[y])
-		return (TRUE);
-	if (x >= (int)ft_strlen(map[y]))
-		return (TRUE);
+		return (LEAK_OUT);
+	if (!map[y] || x >= (int)ft_strlen(map[y]))
+		return (LEAK_OUT);
 	if (map[y][x] == ' ')
-		return (TRUE);
+		return (LEAK_SPACE);
 	if (map[y][x] == '1' || map[y][x] == 'V')
-		return (FALSE);
+		return (LEAK_NONE);
 	map[y][x] = 'V';
-	if (fload_fill(map, x, y - 1))
-		return (TRUE);
-	if (fload_fill(map, x, y + 1))
-		return (TRUE);
-	if (fload_fill(map, x + 1, y))
-		return (TRUE);
-	if (fload_fill(map, x - 1, y))
-		return (TRUE);
-	return (FALSE);
+	res = flood_fill(map, x, y - 1);
+	if (res != LEAK_NONE)
+		return (res);
+	res = flood_fill(map, x, y + 1);
+	if (res != LEAK_NONE)
+		return (res);
+	res = flood_fill(map, x + 1, y);
+	if (res != LEAK_NONE)
+		return (res);
+	res = flood_fill(map, x - 1, y);
+	if (res != LEAK_NONE)
+		return (res);
+	return (LEAK_NONE);
 }
 
 t_bool	is_map_closed(t_config *conf)
 {
 	char	**cpy;
-	t_bool	is_leak;
+	t_leak leak;
 	int		i;
 
 	cpy = dup_map(conf->map);
@@ -77,9 +81,11 @@ t_bool	is_map_closed(t_config *conf)
 		print_error(MAP_LABEL, "malloc failed.");
 		return (FALSE);
 	}
-	is_leak = fload_fill(cpy, conf->player_x, conf->player_y);
-	if (is_leak)
+	leak = flood_fill(cpy, conf->player_x, conf->player_y);
+	if (leak == LEAK_OUT)
 		print_error(MAP_LABEL, "not closed by walls.");
+	else if (leak == LEAK_SPACE)
+		print_error(MAP_LABEL, "contains a space.");
 	i = 0;
 	while (cpy[i])
 	{
@@ -87,5 +93,5 @@ t_bool	is_map_closed(t_config *conf)
 		i++;
 	}
 	free(cpy);
-	return (!is_leak);
+	return (leak == LEAK_NONE);
 }
