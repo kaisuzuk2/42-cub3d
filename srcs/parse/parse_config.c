@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 15:19:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2026/01/27 15:29:49 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2026/01/29 12:07:28 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_bool	read_config(int fd, t_config *conf)
 		{
 			free(line);
 			return (print_error(CONF_LABEL, "missing configuration."), FALSE);
+			return (FALSE);
 		}
 		free(line);
 	}
